@@ -1,8 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import store from './redux/store/store'
 import { legacy_createStore as createStore, applyMiddleware, compose } from 'redux';
 import reduxThunk from 'redux-thunk';
 import openweather from './apis/openweather';
@@ -15,14 +15,8 @@ async function LogData() {
 
 LogData();
 
-
-const router = createBrowserRouter([{
-    path: '/',
-    element: <App />
-}]);
-
 createRoot(document.querySelector('#root')).render(
-    <RouterProvider router={router}>
+    <Provider store={store}>
         <App />
-    </RouterProvider>
+    </Provider>
 )
