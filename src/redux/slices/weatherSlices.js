@@ -32,7 +32,7 @@ const weatherSlice = createSlice({
 
         //fulfilled
         builder.addCase(fetchWeatherAction.fulfilled, (state, action) => {
-            console.log(action);
+            // console.log(action);
             state.weather = action?.payload;
             state.loading = false;
             state.error = undefined;

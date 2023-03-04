@@ -23,8 +23,8 @@ function App() {
 
     }, []);
 
-    const state = useSelector(state => state);
-    console.log(state);
+    // const state = useSelector(state => state);
+    // console.log(state);
 
     return (
         <div>
