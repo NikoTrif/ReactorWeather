@@ -1,28 +1,29 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import * as calculations from '../backend/calculations';
 
 function CurrentWeather() {
     const state = useSelector(state => state);
     const { weather, loading, error } = state;
 
-    const CalculateTemp = (unit, value) => {
-        if (unit === "C") {
-            return Math.floor(value - 273.15);
-        }
-        else if (unit === "F") {
-            return Math.floor((value - 273.15) * (9 / 5) + 32);
-        }
-    }
+    // const CalculateTemp = (unit, value) => {
+    //     if (unit === "C") {
+    //         return Math.floor(value - 273.15);
+    //     }
+    //     else if (unit === "F") {
+    //         return Math.floor((value - 273.15) * (9 / 5) + 32);
+    //     }
+    // }
 
     const currentTemp = (weather, loading, error) => {
         if (loading === true) {
             return 'Loading...';
         }
-        else if (error !== undefined) {
+        if (error !== undefined) {
             return 'ERROR!';
         }
-        else if (weather !== undefined) {
-            return CalculateTemp("C", weather?.main?.temp);
+        if (weather !== undefined) {
+            return calculations.CalculateTemp("C", weather?.main?.temp);
         }
     }
 
