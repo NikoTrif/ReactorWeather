@@ -6,16 +6,7 @@ function CurrentWeather() {
     const state = useSelector(state => state);
     const { weather, loading, error } = state;
 
-    // const CalculateTemp = (unit, value) => {
-    //     if (unit === "C") {
-    //         return Math.floor(value - 273.15);
-    //     }
-    //     else if (unit === "F") {
-    //         return Math.floor((value - 273.15) * (9 / 5) + 32);
-    //     }
-    // }
-
-    const currentTemp = (weather, loading, error) => {
+    const showTemp = (temp, loading, error) => {
         if (loading === true) {
             return 'Loading...';
         }
@@ -23,7 +14,19 @@ function CurrentWeather() {
             return 'ERROR!';
         }
         if (weather !== undefined) {
-            return calculations.CalculateTemp("C", weather?.main?.temp);
+            return calculations.CalculateTemp("C", temp);
+        }
+    }
+
+    const showStat = (stat, loading, error) => {
+        if (loading === true) {
+            return 'Loading...';
+        }
+        if (error !== undefined) {
+            return 'ERROR!';
+        }
+        if (weather !== undefined) {
+            return stat;
         }
     }
 
@@ -31,9 +34,9 @@ function CurrentWeather() {
         <div>
             <h3>CurrentWeather</h3>
             <div>
-                <h2><span>{currentTemp(weather, loading, error)}</span>° <span>C</span> <span><button>F</button></span></h2>
-                <p>Sunny</p>
-                <p><span>Real Feel:</span><span>35</span>° <span>C</span></p>
+                <h2><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>C</span> <span><button>F</button></span></h2>
+                <p>{showStat(weather?.weather[0]?.main, loading, error)}</p>
+                <p><span>Real Feel:</span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>C</span></p>
                 {/* <h2>{cTemp}°{unit} <span><button>{unusedUnit}</button></span></h2>
                 <p>{weather}</p>
                 <p>Real Feel: {rfTemp}°{unit}</p> */}
@@ -43,19 +46,19 @@ function CurrentWeather() {
                     <tbody>
                         <tr>
                             <td>Wind:</td>
-                            <td id="wind"><span id="wind-speed">20</span> m/s <span id="wind-direction">30</span>°</td>
+                            <td id="wind"><span id="wind-speed">{showStat(weather?.wind?.speed, loading, error)}</span> m/s <span id="wind-direction">{showStat(weather?.wind?.deg, loading, error)}</span>°</td>
                         </tr>
                         <tr>
-                            <td>Preasure:</td>
-                            <td><span id="pressure">1001</span> mb</td>
+                            <td>Pressure:</td>
+                            <td><span id="pressure">{showStat(weather?.main?.pressure, loading, error)}</span> mb</td>
                         </tr>
                         <tr>
                             <td>Humidity:</td>
-                            <td><span id="humidity">60</span>%</td>
+                            <td><span id="humidity">{showStat(weather?.main?.humidity, loading, error)}</span>%</td>
                         </tr>
                         <tr>
                             <td>Visibility:</td>
-                            <td><span id="visibility">100</span> m</td>
+                            <td><span id="visibility">{showStat(weather?.visibility, loading, error)}</span> m</td>
                         </tr>
                     </tbody>
                 </table>
