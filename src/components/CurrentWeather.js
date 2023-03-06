@@ -5,8 +5,8 @@ import * as calculations from '../backend/calculations';
 function CurrentWeather() {
     const state = useSelector(state => state);
     const { weather: { weather, loading, error } } = state;
-    console.log("CurrentWeather");
-    console.log(state);
+    // console.log("CurrentWeather");
+    // console.log(weather);
 
     const showTemp = (temp, loading, error) => {
         if (loading === true) {

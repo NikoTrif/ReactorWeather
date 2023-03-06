@@ -18,6 +18,7 @@ function App() {
             coord.lat = position.coords.latitude;
             coord.lon = position.coords.longitude;
             dispatch(fetchWeatherAction(coord));
+            dispatch(fetchForecastAction(coord));
         }, (error) => {
             console.log(error);
         });
