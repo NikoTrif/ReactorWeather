@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { CallWeather, CallForecast } from '../../apis/openweather';
 
@@ -35,7 +35,7 @@ export const fetchForecastAction = createAsyncThunk(
             return rejectWithValue(error?.response?.data);
         }
     }
-)
+);
 
 //slices
 const weatherSlice = createSlice({
@@ -60,30 +60,8 @@ const weatherSlice = createSlice({
             state.loading = false;
             state.weather = undefined;
             state.error = action?.payload;
-        })
+        });
     }
-    // name: 'forecast',
-    // initialState: {},
-    // extraReducers: builder => {
-    //     //pending
-    //     builder.addCase(fetchForecastAction.pending, (state, action) => {
-    //         state.loading = true;
-    //     });
-
-    //     //fullfiled
-    //     builder.addCase(fetchForecastAction.fulfilled, (state, action) => {
-    //         state.forecast = action?.payload;
-    //         state.loading = false;
-    //         state.error = undefined;
-    //     });
-
-    //     //rejected
-    //     builder.addCase(fetchForecastAction.rejected, (state, action) => {
-    //         state.forecast = undefined;
-    //         state.loading = false;
-    //         state.error = action?.payload;
-    //     });
-    // }
 });
 
 const forecastSlice = createSlice({
@@ -109,12 +87,11 @@ const forecastSlice = createSlice({
             state.error = action?.payload;
         });
     }
-})
+});
 
-// export weatherSlice.reducer;
-// export forecastSlice.reducer;
+const rootReducer = combineReducers({
+    weather: weatherSlice.reducer,
+    forecast: forecastSlice.reducer
+});
 
-export default {
-    weatherReducer: weatherSlice.reducer,
-    forecastReducer: forecastSlice.reducer
-};
+export default rootReducer;

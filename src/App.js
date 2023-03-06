@@ -1,9 +1,10 @@
+import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Foother from './components/Foother';
 import Head from './components/Head';
 import Main from './components/Main';
-import { fetchWeatherAction } from './redux/slices/weatherSlices';
+import { fetchWeatherAction, fetchForecastAction } from './redux/slices/weatherSlices';
 
 function App() {
     const dispatch = useDispatch();
@@ -22,9 +23,6 @@ function App() {
         });
 
     }, []);
-
-    // const state = useSelector(state => state);
-    // console.log(state);
 
     return (
         <div>

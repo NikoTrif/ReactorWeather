@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import DayForecast from './DayForecast';
 
 function Forecast() {
     return (
-        <h2>Forecast</h2>
+        <Fragment>
+            <h2>Forecast</h2>
+            <DayForecast />
+        </Fragment>
     );
 }
 

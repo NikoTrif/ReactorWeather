@@ -4,7 +4,9 @@ import * as calculations from '../backend/calculations';
 
 function CurrentWeather() {
     const state = useSelector(state => state);
-    const { weather, loading, error } = state;
+    const { weather: { weather, loading, error } } = state;
+    console.log("CurrentWeather");
+    console.log(state);
 
     const showTemp = (temp, loading, error) => {
         if (loading === true) {
@@ -37,9 +39,6 @@ function CurrentWeather() {
                 <h2><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>C</span> <span><button>F</button></span></h2>
                 <p>{showStat(weather?.weather[0]?.main, loading, error)}</p>
                 <p><span>Real Feel:</span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>C</span></p>
-                {/* <h2>{cTemp}°{unit} <span><button>{unusedUnit}</button></span></h2>
-                <p>{weather}</p>
-                <p>Real Feel: {rfTemp}°{unit}</p> */}
             </div>
             <div>
                 <table>
