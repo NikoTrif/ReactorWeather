@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { useSelector } from 'react-redux';
 import DayForecast from './DayForecast';
+import * as calculations from '../backend/calculations';
 
 function Forecast() {
+    const forecastExtracted = [];
     class OneDayForecast {
         constructor() {
             this.date = new Date();
@@ -20,30 +22,42 @@ function Forecast() {
     const LoadDays = () => {
         if (forecast !== undefined) {
             let dat;
-            let datTemp = Date();
+            let datTemp = new Date();
             let odf = new OneDayForecast();
-            const forecastExtracted = [];
-            forecast?.list.forEach(h => {
 
+            forecast?.list.forEach((h, index) => {
                 dat = new Date(h.dt * 1000);
 
                 if (dat.toLocaleDateString() !== new Date().toLocaleDateString()) {
-                    if (datTemp !== undefined) {
-                        if (datTemp.toLocaleDateString() === dat.toLocaleDateString()) {
-                            if (h?.main?.temp_min < odf.min) {
-                                odf.min = h?.main?.temp_min;
-                            }
-                            if (h?.main?.temp_max > odf.max) {
-                                odf.max = h?.main?.temp_max;
-                            }
+                    if (datTemp.toLocaleDateString() === new Date().toLocaleDateString()) {
+                        datTemp = dat;
+                    }
+                    if (datTemp.toLocaleDateString() === dat.toLocaleDateString()) {
+                        if (h?.main?.temp_min < odf.min) {
+                            odf.min = h?.main?.temp_min;
                         }
-                        else {
-                            odf = new OneDayForecast();
-                            odf.date = dat.toLocaleDateString();
+                        if (h?.main?.temp_max > odf.max) {
+                            odf.max = h?.main?.temp_max;
                         }
                     }
                     else {
+                        odf.date = datTemp;
+                        odf.icon = h?.weather[0]?.icon;
+                        forecastExtracted.push(odf);
+                        odf = new OneDayForecast();
                         datTemp = dat;
+                        if (h?.main?.temp_min < odf.min) {
+                            odf.min = h?.main?.temp_min;
+                        }
+                        if (h?.main?.temp_max > odf.max) {
+                            odf.max = h?.main?.temp_max;
+                        }
+                    }
+
+                    if (index === forecast?.list.length - 1) {
+                        odf.date = datTemp;
+                        odf.icon = h?.weather[0]?.icon;
+                        forecastExtracted.push(odf);
                     }
                 }
 
@@ -51,12 +65,19 @@ function Forecast() {
         }
     }
 
-    LoadDays(forecast);
+    LoadDays();
 
     return (
         <Fragment>
-            <h2>Forecast</h2>
-            <DayForecast />
+            <h3>Forecast</h3>
+            {
+                forecastExtracted.map((day, i) => {
+                    if (forecastExtracted.length !== 0) {
+                        return <DayForecast key={i} day={day?.date.getDay()} date={day?.date.toLocaleDateString()} minTemp={calculations.CalculateTemp("C", day?.min)}
+                            maxTemp={calculations.CalculateTemp("C", day?.max)} icom={day?.icon} />
+                    }
+                })
+            }
         </Fragment>
     );
 }
