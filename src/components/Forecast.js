@@ -16,6 +16,7 @@ function Forecast() {
 
     const state = useSelector(state => state);
     const { forecast: { forecast, loading, error } } = state;
+    const weekday = ["Sunday", "Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday"];
     // console.log("DayForecast");
     // console.log(forecast);
 
@@ -42,7 +43,7 @@ function Forecast() {
                     }
                     else {
                         odf.date = datTemp;
-                        odf.icon = h?.weather[0]?.icon;
+                        odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
                         forecastExtracted.push(odf);
                         odf = new OneDayForecast();
                         datTemp = dat;
@@ -56,7 +57,7 @@ function Forecast() {
 
                     if (index === forecast?.list.length - 1) {
                         odf.date = datTemp;
-                        odf.icon = h?.weather[0]?.icon;
+                        odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
                         forecastExtracted.push(odf);
                     }
                 }
@@ -73,8 +74,13 @@ function Forecast() {
             {
                 forecastExtracted.map((day, i) => {
                     if (forecastExtracted.length !== 0) {
-                        return <DayForecast key={i} day={day?.date.getDay()} date={day?.date.toLocaleDateString()} minTemp={calculations.CalculateTemp("C", day?.min)}
-                            maxTemp={calculations.CalculateTemp("C", day?.max)} icom={day?.icon} />
+                        return <DayForecast
+                            key={i}
+                            day={weekday[day?.date.getDay()]}
+                            date={day?.date.toLocaleDateString('sr-RS')}
+                            minTemp={calculations.CalculateTemp("C", day?.min)}
+                            maxTemp={calculations.CalculateTemp("C", day?.max)}
+                            icon={day?.icon} />
                     }
                 })
             }
