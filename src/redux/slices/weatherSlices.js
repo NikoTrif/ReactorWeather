@@ -1,9 +1,9 @@
-import { combineReducers, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { CallWeather, CallForecast } from '../../apis/openweather';
 
 
-//actions
+//ACTIONS
 export const fetchWeatherAction = createAsyncThunk(
     'weather/fetch',
     async (payload, { rejectWithValue, getState, dispatch }) => {
@@ -37,7 +37,24 @@ export const fetchForecastAction = createAsyncThunk(
     }
 );
 
-//slices
+export const fetchWorldAction = createAsyncThunk(
+    'world/fetch',
+    async (payload, { rejectWithValue, getState, dispatch }) => {
+        try {
+            const { data } = await axios.get(payload)
+            console.log(data);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+);
+
+//SLICES
 const weatherSlice = createSlice({
     name: 'weather',
     initialState: {},
@@ -89,9 +106,35 @@ const forecastSlice = createSlice({
     }
 });
 
+const worldSlice = createSlice({
+    name: 'world',
+    initialState: {},
+    extraReducers: builder => {
+        //pending
+        builder.addCase(fetchWorldAction.pending, (state, action) => {
+            state.loading = true;
+        });
+
+        //fulfilled
+        builder.addCase(fetchWorldAction.fulfilled, (state, action) => {
+            state.world = action?.payload;
+            state.loading = false;
+            state.error = undefined;
+        });
+
+        //rejected
+        builder.addCase(fetchWorldAction.rejected, (state, action) => {
+            state.world = undefined;
+            state.loading = false;
+            state.error = action?.payload;
+        });
+    }
+})
+
 const rootReducer = combineReducers({
     weather: weatherSlice.reducer,
-    forecast: forecastSlice.reducer
+    forecast: forecastSlice.reducer,
+    world: worldSlice.reducer
 });
 
 export default rootReducer;
