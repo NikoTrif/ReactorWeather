@@ -7,7 +7,3 @@ export function CallForecast(lat, lon) {
     const apiKey = '8e1cf7d0e536d5b4b9e3ab3ff361aaf5';
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 }
-
-// export default axios.create({
-//     baseURL: CallWeather()
-// });

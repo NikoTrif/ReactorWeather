@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { fetchWeatherAction, fetchForecastAction, fetchWorldAction } from './redux/slices/weatherSlices';
 
 import Foother from './components/Foother';
@@ -8,12 +8,12 @@ import Main from './components/Main';
 
 function App() {
     const dispatch = useDispatch();
-    const coord = {
-        lat: 0,
-        lon: 0
-    };
 
     useEffect(() => {
+        const coord = {
+            lat: 0,
+            lon: 0
+        };
         navigator.geolocation.getCurrentPosition((position) => {
             coord.lat = position.coords.latitude;
             coord.lon = position.coords.longitude;
@@ -24,7 +24,7 @@ function App() {
             console.log(error);
         });
 
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>

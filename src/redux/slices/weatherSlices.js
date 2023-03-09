@@ -1,4 +1,4 @@
-import { combineReducers, createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { CallWeather, CallForecast } from '../../apis/openweather';
 
@@ -42,7 +42,7 @@ export const fetchWorldAction = createAsyncThunk(
     async (payload, { rejectWithValue, getState, dispatch }) => {
         try {
             const { data } = await axios.get(payload)
-            console.log(data);
+            //console.log(data);
             return data;
         } catch (error) {
             if (!error?.response) {
