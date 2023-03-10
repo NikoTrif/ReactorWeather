@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Select from 'react-select';
+
 
 function Head() {
     const state = useSelector(state => state);
     const [inpVal, setInpVal] = useState('');
     const [inpOneVal, setOneVal] = useState('');
     const { world: { world, loading, error } } = state;
+
+    class Option {
+        constructor(lat, lon, city, country) {
+            this.lat = lat;
+            this.lon = lon;
+            this.city = city;
+            this.country = country;
+        }
+    }
 
     useEffect(() => {
         const timeOutValue = setTimeout(() => {
@@ -49,6 +60,7 @@ function Head() {
     }
 
     let filteredCities = [];
+    let options = [];
     if (inpOneVal === inpVal) {
         filteredCities = LoadInput(inpOneVal, world, loading, error);
         // console.log(filteredCities);
@@ -57,21 +69,37 @@ function Head() {
         filteredCities = [];
     }
 
+    if (filteredCities !== []) {
+        filteredCities.map((city, i) => {
+            // let opt = new Option(city.lat, city.lng, city.city, city.country);
+            // console.log(opt);
+            options.push({
+                label: city.city + ', ' + city.country,
+                value: {
+                    lat: city.lat,
+                    lon: city.lng
+                }
+            });
+        });
+        console.log(options);
+    }
+
     return (
         <div>
             <h1>Reactor Weather</h1>
             <h2><button>Beograd, Srbija</button></h2>
             <input type="text" id='cityInput' onChange={e => { setInpVal(e.target.value) }} />
             <div>
-                <select name='CitySelect' id='citySelect' multiple aria-label='multiple select'>{
+                {/* <select name='CitySelect' id='citySelect' multiple aria-label='multiple select'>{
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
-                            return <option value={`${city.lat}, ${city.lon}`} key={`opt${i}`}>{city.city}, {city.country}</option>
+                            return <option value={`${city.lat},${city.lon}`} key={`opt${i}`}>{city.city}, {city.country}</option>
                         }
                     })
-                }</select>
+                }</select> */}
+                <Select aria-label='Select City' options={options} />
             </div>
-        </div>
+        </div >
     );
 }
 
