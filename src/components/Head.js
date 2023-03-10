@@ -12,7 +12,6 @@ function Head() {
         const timeOutValue = setTimeout(() => {
             setOneVal(inpVal)
         }, 500);
-        //LoadInput(inpOneVal, world, loading, error);
         return () => clearTimeout(timeOutValue);
     }, [inpVal, inpOneVal]);
 
@@ -50,8 +49,10 @@ function Head() {
         return [];
     }
     let filteredCities = [];
-    filteredCities = LoadInput(inpOneVal, world, loading, error);
-    console.log(filteredCities);
+    if (inpOneVal.length !== 0) {
+        filteredCities = LoadInput(inpOneVal, world, loading, error);
+    }
+    // console.log(filteredCities);
 
     return (
         <div>
@@ -67,6 +68,9 @@ function Head() {
                                 lon={city.lon}
                                 city={city.city}
                                 country={city.country} />
+                        }
+                        if (i === filteredCities.length - 1) {
+                            filteredCities = [];
                         }
                     })
                 }</select>
