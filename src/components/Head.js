@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Select from 'react-select';
+import SelectSearch from 'react-select-search';
+import 'react-select-search/style.css';
 
 
 function Head() {
@@ -74,7 +75,7 @@ function Head() {
             // let opt = new Option(city.lat, city.lng, city.city, city.country);
             // console.log(opt);
             options.push({
-                label: city.city + ', ' + city.country,
+                name: city.city + ', ' + city.country,
                 value: {
                     lat: city.lat,
                     lon: city.lng
@@ -97,7 +98,7 @@ function Head() {
                         }
                     })
                 }</select> */}
-                <Select aria-label='Select City' options={options} />
+                <SelectSearch options={options} search={true} />
             </div>
         </div >
     );
