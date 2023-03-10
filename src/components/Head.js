@@ -49,9 +49,12 @@ function Head() {
     }
 
     let filteredCities = [];
-    if (inpOneVal.length !== 0) {
+    if (inpOneVal === inpVal) {
         filteredCities = LoadInput(inpOneVal, world, loading, error);
-        setOneVal('');
+        // console.log(filteredCities);
+    }
+    else {
+        filteredCities = [];
     }
 
     return (
@@ -64,9 +67,6 @@ function Head() {
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
                             return <option value={`${city.lat}, ${city.lon}`} key={`opt${i}`}>{city.city}, {city.country}</option>
-                        }
-                        if (i === filteredCities.length - 1) {
-                            filteredCities = [];
                         }
                     })
                 }</select>
