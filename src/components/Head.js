@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import SelectorOptions from './SelectorOptions';
 
 function Head() {
     const state = useSelector(state => state);
@@ -48,11 +47,12 @@ function Head() {
         }
         return [];
     }
+
     let filteredCities = [];
     if (inpOneVal.length !== 0) {
         filteredCities = LoadInput(inpOneVal, world, loading, error);
+        setOneVal('');
     }
-    // console.log(filteredCities);
 
     return (
         <div>
@@ -63,11 +63,7 @@ function Head() {
                 <select name='CitySelect' id='citySelect' multiple aria-label='multiple select'>{
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
-                            return <SelectorOptions
-                                lat={city.lat}
-                                lon={city.lon}
-                                city={city.city}
-                                country={city.country} />
+                            return <option value={`${city.lat}, ${city.lon}`} key={`opt${i}`}>{city.city}, {city.country}</option>
                         }
                         if (i === filteredCities.length - 1) {
                             filteredCities = [];
