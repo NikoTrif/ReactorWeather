@@ -1,5 +1,6 @@
 import { combineReducers, createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { createRenderer } from 'react-dom/test-utils';
 import { CallWeather, CallForecast, callCity } from '../../apis/openweather';
 
 
@@ -9,8 +10,8 @@ export const fetchOWCityAction = createAsyncThunk(
     async (payload, { rejectWithValue, getState, dispatch }) => {
         try {
             const { data } = await axios.get(callCity(payload.lat, payload.lon));
-            console.log(data);
-            return data;
+            // console.log(data);
+            return data[0];
         } catch (error) {
             if (!error?.response) {
                 throw error;
@@ -75,7 +76,9 @@ export const selectedCityAction = createAction(
     'city',
     (payload) => {
         try {
-            return payload;
+            console.log('weatherSlices->selectedCityAction->payload');
+            console.log(payload);
+            return payload
         } catch (error) {
             console.log(error);
         }
@@ -186,7 +189,7 @@ const worldSlice = createSlice({
 
 const selectedCitySlice = createSlice({
     name: 'city',
-    initialState: '',
+    initialState: {},
     reducers: {
         changeCity: (state, action) => {
             state = action?.payload;

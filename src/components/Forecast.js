@@ -61,7 +61,6 @@ function Forecast() {
                         forecastExtracted.push(odf);
                     }
                 }
-
             });
         }
     }
