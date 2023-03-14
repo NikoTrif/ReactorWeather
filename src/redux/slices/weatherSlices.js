@@ -1,9 +1,26 @@
 import { combineReducers, createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { CallWeather, CallForecast } from '../../apis/openweather';
+import { CallWeather, CallForecast, callCity } from '../../apis/openweather';
 
 
 //ACTIONS
+export const fetchOWCityAction = createAsyncThunk(
+    'city/fetch',
+    async (payload, { rejectWithValue, getState, dispatch }) => {
+        try {
+            const { data } = await axios.get(callCity(payload.lat, payload.lon));
+            console.log(data);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+)
+
 export const fetchWeatherAction = createAsyncThunk(
     'weather/fetch',
     async (payload, { rejectWithValue, getState, dispatch }) => {
@@ -66,6 +83,31 @@ export const selectedCityAction = createAction(
 )
 
 //SLICES
+const owCitySlice = createSlice({
+    name: 'owCity',
+    initialState: {},
+    extraReducers: builder => {
+        //pending
+        builder.addCase(fetchOWCityAction.pending, (state) => {
+            state.loading = true;
+        });
+
+        //fulfilled
+        builder.addCase(fetchOWCityAction.fulfilled, (state, action) => {
+            state.loading = false;
+            state.owCity = action?.payload;
+            state.error = undefined;
+        });
+
+        //rejected
+        builder.addCase(fetchOWCityAction.rejected, (state, action) => {
+            state.loading = false;
+            state.owCity = undefined;
+            state.error = action?.payload;
+        })
+    }
+})
+
 const weatherSlice = createSlice({
     name: 'weather',
     initialState: {},
@@ -153,6 +195,7 @@ const selectedCitySlice = createSlice({
 })
 
 const rootReducer = combineReducers({
+    owCity: owCitySlice.reducer,
     weather: weatherSlice.reducer,
     forecast: forecastSlice.reducer,
     world: worldSlice.reducer,
