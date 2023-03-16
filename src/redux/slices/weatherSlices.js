@@ -85,35 +85,13 @@ export const selectedCityAction = createAction(
 )
 
 //SLICES
-export const currentLocationCoordsAction = dispatch => {
-    const coord = { lat: 0, lon: 0 };
-    navigator.geolocation.getCurrentPosition(position => {
-        console.log(position.coords);
-        coord.lat = position.coords.latitude;
-        coord.lon = position.coords.longitude
-    }, error => {
-        console.log(error);
-    });
-
-    dispatch(getCoords())
-};
 const currentLocationCoordsSlice = createSlice({
     name: 'currentLocationCoords',
     initialState: {},
     reducers: {
         getCoords: (state, action) => {
-            // const coord = { lat: 0, lon: 0 };
-            // navigator.geolocation.getCurrentPosition(position => {
-            //     console.log(position.coords);
-            //     coord.lat = position.coords.latitude;
-            //     coord.lon = position.coords.longitude
-            // }, error => {
-            //     console.log(error);
-            // });
-
+            console.log(action?.payload);
             state.coords = action?.payload;
-
-            return state;
         }
     }
 })

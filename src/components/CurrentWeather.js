@@ -1,12 +1,17 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import * as calculations from '../backend/calculations';
+import { fetchWeatherAction } from '../redux/slices/weatherSlices';
 
 function CurrentWeather() {
+    const dispatch = useDispatch();
     const state = useSelector(state => state);
     const { weather: { weather, loading, error } } = state;
-    // console.log("CurrentWeather");
-    // console.log(weather);
+    const { coords: { coords } } = state;
+
+    useEffect(() => {
+        // dispatch(fetchWeatherAction(coords));
+    }, [])
 
     const showTemp = (temp, loading, error) => {
         if (loading === true) {

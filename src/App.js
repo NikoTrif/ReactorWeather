@@ -12,11 +12,29 @@ function App() {
     const dispatch = useDispatch();
     dispatch(getCoords);
     const state = useSelector(state => state);
+    const [location, setLocation] = useState({ lat: 0, lon: 0 });
+
 
     useEffect(() => {
-        dispatch(getCoords())
+        LoadCurrentLocation();
+        dispatch(getCoords(location));
+
+        console.log('location');
+
+        console.log(location);
+        console.log('state');
         console.log(state.coords);
-    }, [dispatch])
+
+    }, [state]);
+
+    function LoadCurrentLocation() {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setLocation({ lat: position.coords.latitude, lon: position.coords.longitude });
+        }, (error) => {
+            console.log(error.message);
+        });
+    }
+
     // const { owCity, city } = state;
     // const [grad, setGrad] = useState({ name: '', country: '' });
 
