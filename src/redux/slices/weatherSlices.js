@@ -1,6 +1,5 @@
-import { combineReducers, createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, createAction, createAsyncThunk, createReducer, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { createRenderer } from 'react-dom/test-utils';
 import { CallWeather, CallForecast, callCity } from '../../apis/openweather';
 
 
@@ -86,6 +85,39 @@ export const selectedCityAction = createAction(
 )
 
 //SLICES
+export const currentLocationCoordsAction = dispatch => {
+    const coord = { lat: 0, lon: 0 };
+    navigator.geolocation.getCurrentPosition(position => {
+        console.log(position.coords);
+        coord.lat = position.coords.latitude;
+        coord.lon = position.coords.longitude
+    }, error => {
+        console.log(error);
+    });
+
+    dispatch(getCoords())
+};
+const currentLocationCoordsSlice = createSlice({
+    name: 'currentLocationCoords',
+    initialState: {},
+    reducers: {
+        getCoords: (state, action) => {
+            // const coord = { lat: 0, lon: 0 };
+            // navigator.geolocation.getCurrentPosition(position => {
+            //     console.log(position.coords);
+            //     coord.lat = position.coords.latitude;
+            //     coord.lon = position.coords.longitude
+            // }, error => {
+            //     console.log(error);
+            // });
+
+            state.coords = action?.payload;
+
+            return state;
+        }
+    }
+})
+
 const owCitySlice = createSlice({
     name: 'owCity',
     initialState: {},
@@ -198,6 +230,7 @@ const selectedCitySlice = createSlice({
 })
 
 const rootReducer = combineReducers({
+    coords: currentLocationCoordsSlice.reducer,
     owCity: owCitySlice.reducer,
     weather: weatherSlice.reducer,
     forecast: forecastSlice.reducer,
@@ -205,4 +238,5 @@ const rootReducer = combineReducers({
     city: selectedCitySlice.reducer
 });
 
+export const { getCoords } = currentLocationCoordsSlice.actions;
 export default rootReducer;
