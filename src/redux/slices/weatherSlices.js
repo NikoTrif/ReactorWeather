@@ -2,8 +2,26 @@ import { combineReducers, createAction, createAsyncThunk, createReducer, createS
 import axios from 'axios';
 import { CallWeather, CallForecast, callCity } from '../../apis/openweather';
 
+const ipapiURL = 'http://ip-api.com/json/';
+
 
 //ACTIONS
+export const fetchIPLocation = createAsyncThunk(
+    'location/fetch',
+    async (payload, { rejectWithValue, getState, dispatch }) => {
+        try {
+            const { data } = await axios.get(ipapiURL);
+            return data;
+        } catch (error) {
+            if (!error?.response) {
+                throw error;
+            }
+
+            return rejectWithValue(error?.response?.data);
+        }
+    }
+)
+
 export const fetchOWCityAction = createAsyncThunk(
     'city/fetch',
     async (payload, { rejectWithValue, getState, dispatch }) => {
@@ -85,6 +103,26 @@ export const selectedCityAction = createAction(
 )
 
 //SLICES
+const currentLocationCity = createSlice({
+    name: 'ipCity',
+    initialState: {},
+    extraReducers: builder => {
+        builder.addCase(fetchIPLocation.loading, (state) => {
+            state.loading = true;
+        })
+        builder.addCase(fetchIPLocation.fulfilled, (state, action) => {
+            state.loading = false;
+            state.ipCity = action?.payload;
+            state.error = undefined;
+        })
+        builder.addCase(fetchIPLocation.rejected, (state, action) => {
+            state.loading = false;
+            state.ipCity = undefined;
+            state.error = action?.payload;
+        })
+    }
+})
+
 const currentLocationCoordsSlice = createSlice({
     name: 'currentLocationCoords',
     initialState: {},
@@ -117,7 +155,7 @@ const owCitySlice = createSlice({
             state.loading = false;
             state.owCity = undefined;
             state.error = action?.payload;
-        })
+        });
     }
 })
 
@@ -208,6 +246,7 @@ const selectedCitySlice = createSlice({
 })
 
 const rootReducer = combineReducers({
+    ipCity: currentLocationCity.reducer,
     coords: currentLocationCoordsSlice.reducer,
     owCity: owCitySlice.reducer,
     weather: weatherSlice.reducer,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import rootReducer, { fetchWeatherAction, fetchForecastAction, fetchWorldAction, selectedCityAction, fetchOWCityAction, getCoords } from './redux/slices/weatherSlices';
+import rootReducer, { fetchWeatherAction, fetchForecastAction, fetchWorldAction, selectedCityAction, fetchOWCityAction, getCoords, fetchIPLocation } from './redux/slices/weatherSlices';
 
 import Foother from './components/Foother';
 import Head from './components/Head';
@@ -12,27 +12,46 @@ function App() {
     const dispatch = useDispatch();
     dispatch(getCoords);
     const state = useSelector(state => state);
-    const [location, setLocation] = useState({ lat: 0, lon: 0 });
+    const [loc, setLoc] = useState({ lat: 0, lon: 0 });
 
 
     useEffect(() => {
         LoadCurrentLocation();
-        dispatch(getCoords(location));
+        dispatch(getCoords(loc));
 
         console.log('location');
 
-        console.log(location);
+        console.log(loc);
         console.log('state');
         console.log(state.coords);
 
-    }, [state]);
+    }, [dispatch]);
 
-    function LoadCurrentLocation() {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setLocation({ lat: position.coords.latitude, lon: position.coords.longitude });
-        }, (error) => {
-            console.log(error.message);
-        });
+    async function LoadCurrentLocation() {
+
+
+        dispatch(fetchIPLocation());
+        // if (localStorage.getItem('getCurrentPosition') !== null) {
+        //     let crdstr = localStorage.getItem('getCurrentLocation');
+        //     if (crdstr !== null) {
+        //         let crdarr = crdstr.split(',');
+
+        //         setLoc({ lat: Number(crdarr[0]), lon: Number(crdarr[1]) })
+        //     }
+        // }
+        // else {
+        //     navigator.geolocation.getCurrentPosition((position) => {
+        //         let crdstr = `${position.coords.latitude},${position.coords.longitude}`;
+        //         localStorage.setItem('getCurrentPosition', crdstr);
+
+        //         if (crdstr !== null) {
+        //             let crdarr = crdstr.split(',');
+        //             setLoc({ lat: Number(crdarr[0]), lon: Number(crdarr[1]) });
+        //         }
+        //     }, (error) => {
+        //         console.log(error.message);
+        //     });
+        // }
     }
 
     // const { owCity, city } = state;

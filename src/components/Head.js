@@ -11,10 +11,6 @@ function Head(props) {
         city: '',
         country: ''
     };
-    // console.log('Head->props');
-    // console.log(props);
-
-
 
     return (
         <div>
