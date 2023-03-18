@@ -10,8 +10,9 @@ function CurrentWeather() {
     const { coords: { coords } } = state;
 
     useEffect(() => {
-        // dispatch(fetchWeatherAction(coords));
-    }, [])
+        dispatch(fetchWeatherAction(coords));
+        console.log(weather);
+    }, [coords])
 
     const showTemp = (temp, loading, error) => {
         if (loading === true) {

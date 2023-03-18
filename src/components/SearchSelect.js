@@ -1,11 +1,12 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeatherAction } from '../redux/slices/weatherSlices';
+import { changeCity, fetchWeatherAction, getCoords } from '../redux/slices/weatherSlices';
 
 function SearchSelect() {
     const state = useSelector(state => state);
     const [inpVal, setInpVal] = useState('');
     const [inpOneVal, setOneVal] = useState('');
+    const [optionVal, setOptionVal] = useState({ city: '', country: '', lat: 0, lon: 0 });
     const { world: { world, loading, error } } = state;
     const { coords: { coords } } = state;
     const dispatch = useDispatch();
@@ -61,17 +62,15 @@ function SearchSelect() {
         filteredCities = [];
     }
 
-    function selectOnClick(optionValue) {
+    function selectOnClick(optionValue, city) {
         const coord = optionValue.split(',');
         dispatch(getCoords({ lat: coord[0], lon: coord[1] }));
         // const coord = {
         //     lat: coords[0],
         //     lon: coords[1]
         // }
-
+        dispatch(changeCity({ name: city.name, country: city.country }))
         dispatch(fetchWeatherAction(coord));
-        dispatch(fetchWeatherAction(coord))
-
     }
 
     return (
@@ -82,7 +81,7 @@ function SearchSelect() {
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
                             return <option value={`${city.lat},${city.lng}`} key={`opt${i}`} onClick={e => {
-                                selectOnClick(e.target.value)
+                                selectOnClick(e.target.value, { name: city.name, country: city.country });
                             }}>{city.city}, {city.country}</option>
                         }
                     })
