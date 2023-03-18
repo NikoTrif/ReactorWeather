@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCity, fetchOWCityAction, getCoords } from '../redux/slices/weatherSlices';
-// import { currentCoords } from '../redux/slices/weatherSlices';
+import { changeCity, fetchOWCityAction } from '../redux/slices/weatherSlices';
 import SearchSelect from './SearchSelect';
 
 function Head(props) {
