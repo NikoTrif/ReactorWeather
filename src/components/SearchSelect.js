@@ -7,6 +7,7 @@ function SearchSelect() {
     const [inpVal, setInpVal] = useState('');
     const [inpOneVal, setOneVal] = useState('');
     const { world: { world, loading, error } } = state;
+    const { coords: { coords } } = state;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -36,7 +37,7 @@ function SearchSelect() {
                     city = city.filter(e => e.country.toLowerCase().includes(searcherVal[1].toLowerCase()));
                 }
 
-                // console.log(city);
+                console.log(city);
 
                 if (city.length > 0) {
                     return city;
@@ -61,11 +62,13 @@ function SearchSelect() {
     }
 
     function selectOnClick(optionValue) {
-        const coords = optionValue.split(',');
-        const coord = {
-            lat: coords[0],
-            lon: coords[1]
-        }
+        const coord = optionValue.split(',');
+        dispatch(getCoords({ lat: coord[0], lon: coord[1] }));
+        // const coord = {
+        //     lat: coords[0],
+        //     lon: coords[1]
+        // }
+
         dispatch(fetchWeatherAction(coord));
         dispatch(fetchWeatherAction(coord))
 

@@ -24,6 +24,7 @@ function Head(props) {
         <div>
             <h1>Reactor Weather</h1>
             <button>{city?.name}, {city?.country}</button>
+            <br />
             <SearchSelect />
         </div >
     );

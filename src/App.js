@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCoords } from './redux/slices/weatherSlices';
+import { fetchWorldAction, getCoords } from './redux/slices/weatherSlices';
 
 import Foother from './components/Foother';
 import Head from './components/Head';
@@ -18,9 +18,12 @@ function App() {
         console.log(loc);
 
         dispatch(getCoords(loc));
-
-
     }, [loc]);
+
+    useEffect(() => {
+        dispatch(fetchWorldAction('http://localhost:3000/worldcities.json'));
+        console.log('worldFetched');
+    }, []);
 
     function LoadCurrentLocation() {
         console.log('LoadCurrentLocation');
