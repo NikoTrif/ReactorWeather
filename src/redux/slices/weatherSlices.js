@@ -2,25 +2,26 @@ import { combineReducers, createAction, createAsyncThunk, createReducer, createS
 import axios from 'axios';
 import { CallWeather, CallForecast, callCity } from '../../apis/openweather';
 
-const ipapiURL = 'http://ip-api.com/json/';
+// const ipapiURL = 'http://ip-api.com/json/';
 
 
 //ACTIONS
-export const fetchIPLocation = createAsyncThunk(
-    'location/fetch',
-    async (payload, { rejectWithValue, getState, dispatch }) => {
-        try {
-            const { data } = await axios.get(ipapiURL);
-            return data;
-        } catch (error) {
-            if (!error?.response) {
-                throw error;
-            }
 
-            return rejectWithValue(error?.response?.data);
-        }
-    }
-)
+// export const fetchIPLocation = createAsyncThunk(
+//     'location/fetch',
+//     async (payload, { rejectWithValue, getState, dispatch }) => {
+//         try {
+//             const { data } = await axios.get(ipapiURL);
+//             return data;
+//         } catch (error) {
+//             if (!error?.response) {
+//                 throw error;
+//             }
+
+//             return rejectWithValue(error?.response?.data);
+//         }
+//     }
+// )
 
 export const fetchOWCityAction = createAsyncThunk(
     'city/fetch',
@@ -103,25 +104,26 @@ export const selectedCityAction = createAction(
 )
 
 //SLICES
-const currentLocationCity = createSlice({
-    name: 'ipCity',
-    initialState: {},
-    extraReducers: builder => {
-        builder.addCase(fetchIPLocation.loading, (state) => {
-            state.loading = true;
-        })
-        builder.addCase(fetchIPLocation.fulfilled, (state, action) => {
-            state.loading = false;
-            state.ipCity = action?.payload;
-            state.error = undefined;
-        })
-        builder.addCase(fetchIPLocation.rejected, (state, action) => {
-            state.loading = false;
-            state.ipCity = undefined;
-            state.error = action?.payload;
-        })
-    }
-})
+
+// const currentLocationCity = createSlice({
+//     name: 'ipCity',
+//     initialState: {},
+//     extraReducers: builder => {
+//         // builder.addCase(fetchIPLocation.loading, (state, action) => {
+//         //     state.loading = true;
+//         // });
+//         builder.addCase(fetchIPLocation.fulfilled, (state, action) => {
+//             state.loading = false;
+//             state.ipCity = action?.payload;
+//             state.error = undefined;
+//         });
+//         builder.addCase(fetchIPLocation.rejected, (state, action) => {
+//             state.loading = false;
+//             state.ipCity = undefined;
+//             state.error = action?.payload;
+//         });
+//     }
+// })
 
 const currentLocationCoordsSlice = createSlice({
     name: 'currentLocationCoords',
@@ -240,13 +242,13 @@ const selectedCitySlice = createSlice({
     initialState: {},
     reducers: {
         changeCity: (state, action) => {
-            state = action?.payload;
+            state.city = action?.payload;
         }
     }
 })
 
 const rootReducer = combineReducers({
-    ipCity: currentLocationCity.reducer,
+    // ipCity: currentLocationCity.reducer,
     coords: currentLocationCoordsSlice.reducer,
     owCity: owCitySlice.reducer,
     weather: weatherSlice.reducer,
@@ -256,4 +258,5 @@ const rootReducer = combineReducers({
 });
 
 export const { getCoords } = currentLocationCoordsSlice.actions;
+export const { changeCity } = selectedCitySlice.actions;
 export default rootReducer;
