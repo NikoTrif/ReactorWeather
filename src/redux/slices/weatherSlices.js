@@ -94,7 +94,7 @@ const currentLocationCoordsSlice = createSlice({
             state.coords = action?.payload;
         }
     }
-})
+});
 
 const owCitySlice = createSlice({
     name: 'owCity',

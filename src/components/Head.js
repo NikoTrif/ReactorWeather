@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeCity, fetchOWCityAction } from '../redux/slices/weatherSlices';
 import SearchSelect from './SearchSelect';
 
+//USE BIGDATACLOUD API HERE
+
 function Head(props) {
     const state = useSelector(state => state);
     const { coords: { coords }, owCity, city: { city } } = state;

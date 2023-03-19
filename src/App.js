@@ -5,6 +5,7 @@ import { fetchWorldAction, getCoords } from './redux/slices/weatherSlices';
 import Foother from './components/Foother';
 import Head from './components/Head';
 import Main from './components/Main';
+import axios from 'axios';
 
 function App() {
     const dispatch = useDispatch();
@@ -18,6 +19,10 @@ function App() {
         console.log(loc);
 
         dispatch(getCoords(loc));
+
+        locationName();
+
+
     }, [loc]);
 
     useEffect(() => {
@@ -37,6 +42,11 @@ function App() {
                 console.log(error.message);
             });
         }
+    }
+
+    async function locationName() {
+        let response = await axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${loc.lat}&${loc.lon}&localityLanguage=en`);
+        console.log(response);
     }
 
     return (
