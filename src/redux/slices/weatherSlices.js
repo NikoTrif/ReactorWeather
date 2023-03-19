@@ -4,13 +4,13 @@ import { CallWeather, CallForecast, callCity } from '../../apis/openweather';
 
 
 //ACTIONS
-export const fetchOWCityAction = createAsyncThunk(
+export const fetchCityAction = createAsyncThunk(
     'city/fetch',
     async (payload, { rejectWithValue, getState, dispatch }) => {
         try {
-            const { data } = await axios.get(callCity(payload.lat, payload.lon));
-            // console.log(data);
-            return data[0];
+            const { data } = await axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${payload.lat}&${payload.lon}&localityLanguage=en`);
+            console.log('FetchCityAction', data);
+            return data;
         } catch (error) {
             if (!error?.response) {
                 throw error;
@@ -71,51 +71,51 @@ export const fetchWorldAction = createAsyncThunk(
     }
 );
 
-export const selectedCityAction = createAction(
-    'city',
-    (payload) => {
-        try {
-            console.log('weatherSlices->selectedCityAction->payload');
-            console.log(payload);
-            return payload
-        } catch (error) {
-            console.log(error);
-        }
-    }
-)
+// export const selectedCityAction = createAction(
+//     'city',
+//     (payload) => {
+//         try {
+//             console.log('weatherSlices->selectedCityAction->payload');
+//             console.log(payload);
+//             return payload
+//         } catch (error) {
+//             console.log(error);
+//         }
+//     }
+// )
 
 //SLICES
 const currentLocationCoordsSlice = createSlice({
     name: 'currentLocationCoords',
-    initialState: {},
+    initialState: { coords: { lat: 0, lon: 0 } },
     reducers: {
         getCoords: (state, action) => {
-            console.log(action?.payload);
-            state.coords = action?.payload;
+            // console.log(action?.payload);
+            state.coords = { ...action?.payload };
         }
     }
 });
 
-const owCitySlice = createSlice({
-    name: 'owCity',
+const citySlice = createSlice({
+    name: 'city',
     initialState: {},
     extraReducers: builder => {
         //pending
-        builder.addCase(fetchOWCityAction.pending, (state) => {
-            state.loading = true;
-        });
+        // builder.addCase(fetchCityAction.pending, (state) => {
+        //     state.loading = true;
+        // });
 
         //fulfilled
-        builder.addCase(fetchOWCityAction.fulfilled, (state, action) => {
+        builder.addCase(fetchCityAction.fulfilled, (state, action) => {
             state.loading = false;
-            state.owCity = action?.payload;
+            state.city = action?.payload;
             state.error = undefined;
         });
 
         //rejected
-        builder.addCase(fetchOWCityAction.rejected, (state, action) => {
+        builder.addCase(fetchCityAction.rejected, (state, action) => {
             state.loading = false;
-            state.owCity = undefined;
+            state.city = undefined;
             state.error = action?.payload;
         });
     }
@@ -197,25 +197,26 @@ const worldSlice = createSlice({
     }
 })
 
-const selectedCitySlice = createSlice({
-    name: 'city',
-    initialState: {},
-    reducers: {
-        changeCity: (state, action) => {
-            state.city = action?.payload;
-        }
-    }
-})
+// const selectedCitySlice = createSlice({
+//     name: 'city',
+//     initialState: {},
+//     reducers: {
+//         changeCity: (state, action) => {
+//             state.city = action?.payload;
+//         }
+//     }
+// })
 
 const rootReducer = combineReducers({
     coords: currentLocationCoordsSlice.reducer,
-    owCity: owCitySlice.reducer,
+    city: citySlice.reducer,
+    // owCity: owCitySlice.reducer,
     weather: weatherSlice.reducer,
     forecast: forecastSlice.reducer,
-    world: worldSlice.reducer,
-    city: selectedCitySlice.reducer
+    // city: selectedCitySlice.reducer,
+    world: worldSlice.reducer
 });
 
 export const { getCoords } = currentLocationCoordsSlice.actions;
-export const { changeCity } = selectedCitySlice.actions;
+// export const { changeCity } = selectedCitySlice.actions;
 export default rootReducer;

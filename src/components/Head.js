@@ -1,31 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCity, fetchOWCityAction } from '../redux/slices/weatherSlices';
+import { fetchCityAction } from '../redux/slices/weatherSlices';
 import SearchSelect from './SearchSelect';
+import _ from 'lodash';
 
 //USE BIGDATACLOUD API HERE
 
-function Head(props) {
+function Head() {
     const state = useSelector(state => state);
-    const { coords: { coords }, owCity, city: { city } } = state;
+    const { coords: { coords }, city: { city } } = state;
+    const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchOWCityAction(coords));
+        if (!_.isEqual(tempCoords, coords)) {
+            //ODKOMENTUJ
+            dispatch(fetchCityAction(coords));
+            // console.log('tempCoords', { temp: tempCoords, coords: coords });
+            setTempCoords({ lat: coords?.lat, lon: coords?.lon });
+        }
+        console.log('Coords', coords);
     }, [coords]);
 
-    useEffect(() => {
-        dispatch(changeCity({
-            name: owCity?.owCity?.name,
-            country: owCity?.owCity?.country
-        }));
+    // useEffect(() => {
+    //     dispatch(changeCity({
+    //         name: owCity?.owCity?.name,
+    //         country: owCity?.owCity?.country
+    //     }));
 
-    }, [owCity]);
+    // }, [owCity]);
 
     return (
         <div>
             <h1>Reactor Weather</h1>
-            <button>{city?.name}, {city?.country}</button>
+            <button>{city?.city}, {city?.countryName}</button>
             <br />
             <SearchSelect />
         </div >

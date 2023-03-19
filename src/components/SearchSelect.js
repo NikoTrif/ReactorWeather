@@ -69,8 +69,8 @@ function SearchSelect() {
         //     lat: coords[0],
         //     lon: coords[1]
         // }
-        dispatch(changeCity({ name: city.name, country: city.country }))
-        dispatch(fetchWeatherAction(coord));
+        // dispatch(changeCity({ name: city.name, country: city.country }))
+        // dispatch(fetchWeatherAction(coord));
     }
 
     return (
