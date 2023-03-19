@@ -1,6 +1,7 @@
 import { combineReducers, createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { CallWeather, CallForecast, callCity } from '../../apis/openweather';
+import { callCity } from '../../apis/bigdatacloud';
+import { CallWeather, CallForecast } from '../../apis/openweather';
 
 
 //ACTIONS
@@ -8,7 +9,7 @@ export const fetchCityAction = createAsyncThunk(
     'city/fetch',
     async (payload, { rejectWithValue, getState, dispatch }) => {
         try {
-            const { data } = await axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${payload.lat}&${payload.lon}&localityLanguage=en`);
+            const { data } = await axios.get(callCity(payload?.lat, payload?.lon));
             console.log('FetchCityAction', data);
             return data;
         } catch (error) {
@@ -108,7 +109,7 @@ const citySlice = createSlice({
         //fulfilled
         builder.addCase(fetchCityAction.fulfilled, (state, action) => {
             state.loading = false;
-            state.city = action?.payload;
+            state.city = { ...action?.payload };
             state.error = undefined;
         });
 

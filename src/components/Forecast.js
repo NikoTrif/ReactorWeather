@@ -1,7 +1,10 @@
-import React, { Fragment } from 'react';
-import { useSelector } from 'react-redux';
+import React, { Fragment, useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DayForecast from './DayForecast';
 import * as calculations from '../backend/calculations';
+import _ from 'lodash';
+import { fetchForecastAction } from '../redux/slices/weatherSlices';
+
 
 function Forecast() {
     const forecastExtracted = [];
@@ -15,10 +18,20 @@ function Forecast() {
     }
 
     const state = useSelector(state => state);
-    const { forecast: { forecast, loading, error } } = state;
+    const dispatch = useDispatch();
+    const { coords: { coords }, forecast: { forecast, loading, error } } = state;
+    const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday"];
     // console.log("DayForecast");
     // console.log(forecast);
+
+    useEffect(() => {
+        if (!_.isEqual(tempCoords, coords)) {
+            dispatch(fetchForecastAction(coords));
+            setTempCoords(coords);
+        }
+    }, [coords])
+
 
     const LoadDays = () => {
         if (forecast !== undefined) {

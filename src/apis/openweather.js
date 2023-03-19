@@ -8,7 +8,7 @@ export function CallForecast(lat, lon) {
     return `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 }
 
-export function callCity(lat, lon) {
-    const apiKey = 'a043fe65d728314064a9719e20ff126f';
-    return `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`;
-}
+// export function callCity(lat, lon) {
+//     const apiKey = 'a043fe65d728314064a9719e20ff126f';
+//     return `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${apiKey}`;
+// }

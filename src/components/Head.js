@@ -16,8 +16,8 @@ function Head() {
         if (!_.isEqual(tempCoords, coords)) {
             //ODKOMENTUJ
             dispatch(fetchCityAction(coords));
-            // console.log('tempCoords', { temp: tempCoords, coords: coords });
-            setTempCoords({ lat: coords?.lat, lon: coords?.lon });
+            console.log('tempCoords', { temp: tempCoords, coords: coords });
+            setTempCoords(coords);
         }
         console.log('Coords', coords);
     }, [coords]);

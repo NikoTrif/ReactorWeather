@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCity, fetchWeatherAction, getCoords } from '../redux/slices/weatherSlices';
+import { changeCity, fetchCityAction, fetchWeatherAction, getCoords } from '../redux/slices/weatherSlices';
 
 function SearchSelect() {
     const state = useSelector(state => state);
