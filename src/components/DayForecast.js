@@ -8,8 +8,6 @@ function DayForecast(props) {
         e.preventDefault()
 
         setToggle(!toggle);
-
-        console.log('clicked day', props.date);
     }
 
     return (
@@ -37,7 +35,7 @@ function DayForecast(props) {
                     </tbody>
                 </table>
             </a>
-            {toggle ? <HourlyForecast /> : <></>}
+            {toggle ? <HourlyForecast hourlyForecast={props.hourlyForecast} /> : <></>}
 
         </div>
     );

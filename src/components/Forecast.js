@@ -14,6 +14,7 @@ function Forecast() {
             this.min = 1000;
             this.max = 0;
             this.icon = "";
+            this.hourlyForecastArray = [];
         }
     }
 
@@ -51,6 +52,7 @@ function Forecast() {
                         if (h?.main?.temp_max > odf.max) {
                             odf.max = h?.main?.temp_max;
                         }
+                        odf.hourlyForecastArray.push(h);
                     }
                     else {
                         odf.date = datTemp;
@@ -64,6 +66,7 @@ function Forecast() {
                         if (h?.main?.temp_max > odf.max) {
                             odf.max = h?.main?.temp_max;
                         }
+                        odf.hourlyForecastArray.push(h)
                     }
 
                     if (index === forecast?.list.length - 1) {
@@ -90,7 +93,8 @@ function Forecast() {
                             date={day?.date.toLocaleDateString('sr-RS')}
                             minTemp={calculations.CalculateTemp("C", day?.min)}
                             maxTemp={calculations.CalculateTemp("C", day?.max)}
-                            icon={day?.icon} />
+                            icon={day?.icon}
+                            hourlyForecast={day?.hourlyForecastArray} />
                     }
                 })
             }
