@@ -22,8 +22,6 @@ function Forecast() {
     const { coords: { coords }, forecast: { forecast, loading, error } } = state;
     const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday"];
-    // console.log("DayForecast");
-    // console.log(forecast);
 
     useEffect(() => {
         if (!_.isEqual(tempCoords, coords)) {

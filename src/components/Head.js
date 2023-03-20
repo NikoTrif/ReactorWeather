@@ -4,8 +4,6 @@ import { fetchCityAction } from '../redux/slices/weatherSlices';
 import SearchSelect from './SearchSelect';
 import _ from 'lodash';
 
-//USE BIGDATACLOUD API HERE
-
 function Head() {
     const state = useSelector(state => state);
     const { coords: { coords }, city: { city } } = state;
@@ -14,21 +12,10 @@ function Head() {
 
     useEffect(() => {
         if (!_.isEqual(tempCoords, coords)) {
-            //ODKOMENTUJ
             dispatch(fetchCityAction(coords));
-            console.log('tempCoords', { temp: tempCoords, coords: coords });
             setTempCoords(coords);
         }
-        console.log('Coords', coords);
     }, [coords]);
-
-    // useEffect(() => {
-    //     dispatch(changeCity({
-    //         name: owCity?.owCity?.name,
-    //         country: owCity?.owCity?.country
-    //     }));
-
-    // }, [owCity]);
 
     return (
         <div>

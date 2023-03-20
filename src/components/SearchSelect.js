@@ -1,12 +1,11 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeCity, fetchCityAction, fetchWeatherAction, getCoords } from '../redux/slices/weatherSlices';
+import { getCoords } from '../redux/slices/weatherSlices';
 
 function SearchSelect() {
     const state = useSelector(state => state);
     const [inpVal, setInpVal] = useState('');
     const [inpOneVal, setOneVal] = useState('');
-    const [optionVal, setOptionVal] = useState({ city: '', country: '', lat: 0, lon: 0 });
     const { world: { world, loading, error } } = state;
     const { coords: { coords } } = state;
     const dispatch = useDispatch();
@@ -38,8 +37,6 @@ function SearchSelect() {
                     city = city.filter(e => e.country.toLowerCase().includes(searcherVal[1].toLowerCase()));
                 }
 
-                console.log(city);
-
                 if (city.length > 0) {
                     return city;
                 }
@@ -53,24 +50,16 @@ function SearchSelect() {
     }
 
     let filteredCities = [];
-    let options = [];
     if (inpOneVal === inpVal) {
         filteredCities = LoadInput(inpOneVal, world, loading, error);
-        // console.log(filteredCities);
     }
     else {
         filteredCities = [];
     }
 
-    function selectOnClick(optionValue, city) {
+    function selectOnClick(optionValue) {
         const coord = optionValue.split(',');
         dispatch(getCoords({ lat: coord[0], lon: coord[1] }));
-        // const coord = {
-        //     lat: coords[0],
-        //     lon: coords[1]
-        // }
-        // dispatch(changeCity({ name: city.name, country: city.country }))
-        // dispatch(fetchWeatherAction(coord));
     }
 
     return (

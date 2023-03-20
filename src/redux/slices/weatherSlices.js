@@ -1,4 +1,4 @@
-import { combineReducers, createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { combineReducers, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { callCity } from '../../apis/bigdatacloud';
 import { CallWeather, CallForecast } from '../../apis/openweather';
@@ -10,7 +10,7 @@ export const fetchCityAction = createAsyncThunk(
     async (payload, { rejectWithValue, getState, dispatch }) => {
         try {
             const { data } = await axios.get(callCity(payload?.lat, payload?.lon));
-            console.log('FetchCityAction', data);
+            // console.log('FetchCityAction', data);
             return data;
         } catch (error) {
             if (!error?.response) {
@@ -72,19 +72,6 @@ export const fetchWorldAction = createAsyncThunk(
     }
 );
 
-// export const selectedCityAction = createAction(
-//     'city',
-//     (payload) => {
-//         try {
-//             console.log('weatherSlices->selectedCityAction->payload');
-//             console.log(payload);
-//             return payload
-//         } catch (error) {
-//             console.log(error);
-//         }
-//     }
-// )
-
 //SLICES
 const currentLocationCoordsSlice = createSlice({
     name: 'currentLocationCoords',
@@ -101,10 +88,6 @@ const citySlice = createSlice({
     name: 'city',
     initialState: {},
     extraReducers: builder => {
-        //pending
-        // builder.addCase(fetchCityAction.pending, (state) => {
-        //     state.loading = true;
-        // });
 
         //fulfilled
         builder.addCase(fetchCityAction.fulfilled, (state, action) => {
@@ -198,26 +181,13 @@ const worldSlice = createSlice({
     }
 })
 
-// const selectedCitySlice = createSlice({
-//     name: 'city',
-//     initialState: {},
-//     reducers: {
-//         changeCity: (state, action) => {
-//             state.city = action?.payload;
-//         }
-//     }
-// })
-
 const rootReducer = combineReducers({
     coords: currentLocationCoordsSlice.reducer,
     city: citySlice.reducer,
-    // owCity: owCitySlice.reducer,
     weather: weatherSlice.reducer,
     forecast: forecastSlice.reducer,
-    // city: selectedCitySlice.reducer,
     world: worldSlice.reducer
 });
 
 export const { getCoords } = currentLocationCoordsSlice.actions;
-// export const { changeCity } = selectedCitySlice.actions;
 export default rootReducer;
