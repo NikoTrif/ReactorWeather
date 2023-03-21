@@ -2,7 +2,7 @@ import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCoords, setSearchSelectToggle } from '../redux/slices/weatherSlices';
 
-function SearchSelect() {
+function SearchSelect(props) {
     const state = useSelector(state => state);
     const [inpVal, setInpVal] = useState('');
     const [inpOneVal, setOneVal] = useState('');
@@ -75,7 +75,7 @@ function SearchSelect() {
 
     return (
         <Fragment>
-            <input type="text" id='cityInput' onChange={e => { setInpVal(e.target.value) }} onKeyDown={e => { keyDown(e) }} />
+            <input autoFocus type="text" id='cityInput' onChange={e => { setInpVal(e.target.value) }} onKeyDown={e => { keyDown(e) }} />
             <div>
                 <Select filteredCities={filteredCities} selectOnClick={selectOnClick} />
             </div>
