@@ -64,9 +64,18 @@ function SearchSelect() {
         dispatch(setSearchSelectToggle(!toggle));
     }
 
+    function keyDown(e) {
+        if (e.key === 'Enter') {
+            if (filteredCities.length > 0) {
+                console.log(filteredCities[0]);
+                selectOnClick(`${filteredCities[0].lat},${filteredCities[0].lng}`);
+            }
+        }
+    }
+
     return (
         <Fragment>
-            <input type="text" id='cityInput' onChange={e => { setInpVal(e.target.value) }} />
+            <input type="text" id='cityInput' onChange={e => { setInpVal(e.target.value) }} onKeyDown={e => { keyDown(e) }} />
             <div>
                 <Select filteredCities={filteredCities} selectOnClick={selectOnClick} />
             </div>
@@ -83,7 +92,7 @@ function Select(props) {
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
                             return <option value={`${city.lat},${city.lng}`} key={`opt${i}`} onClick={e => {
-                                selectOnClick(e.target.value, { name: city.name, country: city.country });
+                                selectOnClick(e.target.value);
                             }}>{city.city}, {city.country}</option>
                         }
                     })
