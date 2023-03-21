@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import * as calculations from '../backend/calculations';
-import { fetchWeatherAction } from '../redux/slices/weatherSlices';
+import { fetchWeatherAction, setTemperatureScale } from '../redux/slices/weatherSlices';
 import _ from 'lodash';
 
 function CurrentWeather() {
@@ -10,6 +10,7 @@ function CurrentWeather() {
     const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
     const { weather: { weather, loading, error } } = state;
     const { coords: { coords } } = state;
+    const { temperatureScale: { scale, antiscale } } = state;
 
     useEffect(() => {
         if (!_.isEqual(tempCoords, coords)) {
@@ -27,7 +28,7 @@ function CurrentWeather() {
             return 'ERROR!';
         }
         if (weather !== undefined) {
-            return calculations.CalculateTemp("C", temp);
+            return calculations.CalculateTemp(scale, temp);
         }
     }
 
@@ -43,13 +44,17 @@ function CurrentWeather() {
         }
     }
 
+    function changeScale() {
+        dispatch(setTemperatureScale(antiscale));
+    }
+
     return (
         <div>
             <h3>CurrentWeather</h3>
             <div>
-                <h2><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>C</span> <span><button>F</button></span></h2>
+                <h2><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>{scale}</span> <span><button onClick={changeScale}>{antiscale}</button></span></h2>
                 <p>{showStat(weather?.weather[0]?.main, loading, error)}</p>
-                <p><span>Real Feel:</span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>C</span></p>
+                <p><span>Real Feel:</span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>{scale}</span></p>
             </div>
             <div>
                 <table>

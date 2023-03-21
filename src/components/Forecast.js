@@ -21,6 +21,7 @@ function Forecast() {
     const state = useSelector(state => state);
     const dispatch = useDispatch();
     const { coords: { coords }, forecast: { forecast, loading, error } } = state;
+    const { temperatureScale: { scale } } = state;
     const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday"];
 
@@ -91,8 +92,8 @@ function Forecast() {
                             key={i}
                             day={weekday[day?.date.getDay()]}
                             date={day?.date.toLocaleDateString('sr-RS')}
-                            minTemp={calculations.CalculateTemp("C", day?.min)}
-                            maxTemp={calculations.CalculateTemp("C", day?.max)}
+                            minTemp={calculations.CalculateTemp(scale, day?.min)}
+                            maxTemp={calculations.CalculateTemp(scale, day?.max)}
                             icon={day?.icon}
                             hourlyForecast={day?.hourlyForecastArray} />
                     }

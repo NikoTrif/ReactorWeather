@@ -20,7 +20,7 @@ export const fetchCityAction = createAsyncThunk(
             return rejectWithValue(error?.response?.data);
         }
     }
-)
+);
 
 export const fetchWeatherAction = createAsyncThunk(
     'weather/fetch',
@@ -103,7 +103,7 @@ const citySlice = createSlice({
             state.error = action?.payload;
         });
     }
-})
+});
 
 const weatherSlice = createSlice({
     name: 'weather',
@@ -179,7 +179,7 @@ const worldSlice = createSlice({
             state.error = action?.payload;
         });
     }
-})
+});
 
 const searchSelectToggleSlice = createSlice({
     name: 'selectSearchToggle',
@@ -189,7 +189,25 @@ const searchSelectToggleSlice = createSlice({
             state.toggle = action?.payload;
         }
     }
-})
+});
+
+const temperatureScaleSlice = createSlice({
+    name: 'temperatureScale',
+    initialState: { scale: 'C', antiscale: 'F' },
+    reducers: {
+        setTemperatureScale: (state, action) => {
+            state.scale = action?.payload;
+            switch (action?.payload) {
+                case 'C':
+                    state.antiscale = 'F';
+                    break;
+                case 'F':
+                    state.antiscale = 'C';
+                    break;
+            }
+        }
+    }
+});
 
 const rootReducer = combineReducers({
     coords: currentLocationCoordsSlice.reducer,
@@ -197,9 +215,11 @@ const rootReducer = combineReducers({
     city: citySlice.reducer,
     weather: weatherSlice.reducer,
     forecast: forecastSlice.reducer,
+    temperatureScale: temperatureScaleSlice.reducer,
     world: worldSlice.reducer
 });
 
 export const { getCoords } = currentLocationCoordsSlice.actions;
 export const { setSearchSelectToggle } = searchSelectToggleSlice.actions;
+export const { setTemperatureScale } = temperatureScaleSlice.actions;
 export default rootReducer;

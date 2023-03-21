@@ -1,7 +1,10 @@
 import React, { Component, useState } from 'react';
+import { useSelector } from 'react-redux';
 import HourlyForecast from './HourlyForecast';
 
 function DayForecast(props) {
+    const state = useSelector(state => state);
+    const { temperatureScale: { scale } } = state;
     const [toggle, setToggle] = useState(false);
 
     function dayForecastClick(e) {
@@ -22,14 +25,14 @@ function DayForecast(props) {
                             <td>
                                 Max
                                 <br />
-                                {props.maxTemp}
+                                {props.maxTemp}° {scale}
                             </td>
                         </tr>
                         <tr key={props.day + 'min'}>
                             <td>
                                 Min
                                 <br />
-                                {props.minTemp}
+                                {props.minTemp}° {scale}
                             </td>
                         </tr>
                     </tbody>
