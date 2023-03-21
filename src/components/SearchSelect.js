@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCoords } from '../redux/slices/weatherSlices';
+import { getCoords, setSearchSelectToggle } from '../redux/slices/weatherSlices';
 
 function SearchSelect() {
     const state = useSelector(state => state);
@@ -8,6 +8,7 @@ function SearchSelect() {
     const [inpOneVal, setOneVal] = useState('');
     const { world: { world, loading, error } } = state;
     const { coords: { coords } } = state;
+    const { searchSelectToggle: { toggle } } = state;
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -60,13 +61,25 @@ function SearchSelect() {
     function selectOnClick(optionValue) {
         const coord = optionValue.split(',');
         dispatch(getCoords({ lat: coord[0], lon: coord[1] }));
+        dispatch(setSearchSelectToggle(!toggle));
     }
 
     return (
         <Fragment>
             <input type="text" id='cityInput' onChange={e => { setInpVal(e.target.value) }} />
             <div>
-                <select name='CitySelect' id='citySelect' multiple aria-label='multiple select'>{
+                <Select filteredCities={filteredCities} selectOnClick={selectOnClick} />
+            </div>
+        </Fragment>
+    );
+}
+
+function Select(props) {
+    const { filteredCities, selectOnClick } = props;
+    if (filteredCities.length > 0) {
+        return (
+            <select name='CitySelect' id='citySelect' multiple aria-label='multiple select'>
+                {
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
                             return <option value={`${city.lat},${city.lng}`} key={`opt${i}`} onClick={e => {
@@ -74,10 +87,13 @@ function SearchSelect() {
                             }}>{city.city}, {city.country}</option>
                         }
                     })
-                }</select>
-            </div>
-        </Fragment>
-    );
+                }
+            </select>
+        )
+    }
+    else {
+        return null
+    }
 }
 
 export default SearchSelect;
