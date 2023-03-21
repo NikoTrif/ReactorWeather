@@ -181,8 +181,19 @@ const worldSlice = createSlice({
     }
 })
 
+const searchSelectToggleSlice = createSlice({
+    name: 'selectSearchToggle',
+    initialState: { toggle: false },
+    reducers: {
+        setSearchSelectToggle: (state, action) => {
+            state.toggle = action?.payload;
+        }
+    }
+})
+
 const rootReducer = combineReducers({
     coords: currentLocationCoordsSlice.reducer,
+    searchSelectToggle: searchSelectToggleSlice.reducer,
     city: citySlice.reducer,
     weather: weatherSlice.reducer,
     forecast: forecastSlice.reducer,
@@ -190,4 +201,5 @@ const rootReducer = combineReducers({
 });
 
 export const { getCoords } = currentLocationCoordsSlice.actions;
+export const { setSearchSelectToggle } = searchSelectToggleSlice.actions;
 export default rootReducer;
