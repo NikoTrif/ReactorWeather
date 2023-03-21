@@ -67,7 +67,6 @@ function SearchSelect(props) {
     function keyDown(e) {
         if (e.key === 'Enter') {
             if (filteredCities.length > 0) {
-                console.log(filteredCities[0]);
                 selectOnClick(`${filteredCities[0].lat},${filteredCities[0].lng}`);
             }
         }
