@@ -4,6 +4,8 @@ import { fetchCityAction, setSearchSelectToggle } from '../redux/slices/weatherS
 import SearchSelect from './SearchSelect';
 import _ from 'lodash';
 
+import '../styles/sass/head.scss';
+
 function Head() {
     const state = useSelector(state => state);
     const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
@@ -20,7 +22,7 @@ function Head() {
     }, [coords]);
 
     return (
-        <div>
+        <div className='head'>
             <h1>Reactor Weather</h1>
             <button onClick={() => { dispatch(setSearchSelectToggle(!toggle)) }}>{city?.city}, {city?.countryName}</button>
             <br />

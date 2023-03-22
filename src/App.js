@@ -6,6 +6,8 @@ import Foother from './components/Foother';
 import Head from './components/Head';
 import Main from './components/Main';
 
+import './styles/sass/app.scss'
+
 function App() {
     const dispatch = useDispatch();
     const state = useSelector(state => state);
@@ -36,7 +38,7 @@ function App() {
     }
 
     return (
-        <div>
+        <div className='app'>
             <Head />
             <Main />
             <Foother />
