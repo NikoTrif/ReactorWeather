@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCoords, setSearchSelectToggle } from '../redux/slices/weatherSlices';
+import '../styles/sass/search-select.scss';
 
 function SearchSelect(props) {
     const state = useSelector(state => state);
@@ -73,12 +74,20 @@ function SearchSelect(props) {
     }
 
     return (
-        <Fragment>
-            <input autoFocus type="text" id='cityInput' onChange={e => { setInpVal(e.target.value) }} onKeyDown={e => { keyDown(e) }} />
-            <div>
+        <div className='search-select'>
+            <div className='ui search'>
+                <input
+                    autoFocus
+                    placeholder='Search city'
+                    type="text"
+                    id='cityInput'
+                    onChange={e => { setInpVal(e.target.value) }} onKeyDown={e => { keyDown(e) }}
+                    className='prompt my-search' />
+            </div>
+            <div className='result'>
                 <Select filteredCities={filteredCities} selectOnClick={selectOnClick} />
             </div>
-        </Fragment>
+        </div>
     );
 }
 
@@ -86,7 +95,11 @@ function Select(props) {
     const { filteredCities, selectOnClick } = props;
     if (filteredCities.length > 0) {
         return (
-            <select name='CitySelect' id='citySelect' multiple aria-label='multiple select'>
+            <select
+                name='CitySelect'
+                id='citySelect'
+                multiple aria-label='multiple select'
+                className='ui search dropdown select'>
                 {
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
