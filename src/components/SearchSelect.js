@@ -98,7 +98,9 @@ function Select(props) {
             <select
                 name='CitySelect'
                 id='citySelect'
-                multiple aria-label='multiple select'
+                multiple
+                autoComplete='false'
+
                 className='ui search dropdown select'>
                 {
                     filteredCities.map((city, i) => {
