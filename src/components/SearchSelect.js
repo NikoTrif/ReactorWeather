@@ -78,6 +78,7 @@ function SearchSelect(props) {
             <div className='ui search'>
                 <input
                     autoFocus
+                    autoComplete='off'
                     placeholder='Search city'
                     type="text"
                     id='cityInput'
@@ -100,8 +101,9 @@ function Select(props) {
                 id='citySelect'
                 multiple
                 autoComplete='false'
-
-                className='ui search dropdown select'>
+                size={10}
+                className='select'
+            >
                 {
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
