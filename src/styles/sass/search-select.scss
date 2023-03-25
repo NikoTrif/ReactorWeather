@@ -8,7 +8,6 @@
 
     .my-search {
         width: 300px;
-        // margin-bottom: 20px;
         text-align: center;
     }
 
@@ -18,10 +17,6 @@
         text-align: center;
         overflow-y: scroll;
         border: 0px !important;
-        // border-radius: 20px;
-        // size: 10;
-        // min-height: 100px;
-        // max-height: 500px;
 
         option {
             display: flex;
@@ -30,7 +25,6 @@
             padding: 0 5px;
             height: 1.7rem;
             border: 1px solid rgba(34, 36, 38, .15);
-            // border-radius: 20px;
             margin-bottom: 2px;
 
             &:hover {
