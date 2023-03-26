@@ -73,6 +73,18 @@ function SearchSelect(props) {
         }
     }
 
+    function filteredCitiesSize() {
+        let selectSize = 10;
+        if (filteredCities.length <= 9) {
+            selectSize = filteredCities.length + 1;
+        }
+        else {
+            selectSize = 10;
+        }
+
+        return selectSize;
+    }
+
     return (
         <div className='search-select'>
             <div className='ui search'>
@@ -86,14 +98,14 @@ function SearchSelect(props) {
                     className='prompt my-search' />
             </div>
             <div className='result'>
-                <Select filteredCities={filteredCities} selectOnClick={selectOnClick} />
+                <Select filteredCities={filteredCities} selectOnClick={selectOnClick} selectSize={filteredCitiesSize()} />
             </div>
         </div>
     );
 }
 
 function Select(props) {
-    const { filteredCities, selectOnClick } = props;
+    const { filteredCities, selectOnClick, selectSize } = props;
     if (filteredCities.length > 0) {
         return (
             <select
@@ -101,7 +113,7 @@ function Select(props) {
                 id='citySelect'
                 multiple
                 autoComplete='false'
-                size={10}
+                size={selectSize}
                 className='select'
             >
                 {

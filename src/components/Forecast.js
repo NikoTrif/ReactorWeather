@@ -5,6 +5,8 @@ import * as calculations from '../backend/calculations';
 import _ from 'lodash';
 import { fetchForecastAction } from '../redux/slices/weatherSlices';
 
+import '../styles/sass/forecast.scss'
+
 
 function Forecast() {
     const forecastExtracted = [];
@@ -83,23 +85,25 @@ function Forecast() {
     LoadDays();
 
     return (
-        <Fragment>
-            <h3>Forecast</h3>
-            {
-                forecastExtracted.map((day, i) => {
-                    if (forecastExtracted.length !== 0) {
-                        return <DayForecast
-                            key={i}
-                            day={weekday[day?.date.getDay()]}
-                            date={day?.date.toLocaleDateString('sr-RS')}
-                            minTemp={calculations.CalculateTemp(scale, day?.min)}
-                            maxTemp={calculations.CalculateTemp(scale, day?.max)}
-                            icon={day?.icon}
-                            hourlyForecast={day?.hourlyForecastArray} />
-                    }
-                })
-            }
-        </Fragment>
+        <div className='forecast'>
+            <h2>5 Days Forecast</h2>
+            <div className='all-days'>
+                {
+                    forecastExtracted.map((day, i) => {
+                        if (forecastExtracted.length !== 0) {
+                            return <DayForecast
+                                key={i}
+                                day={weekday[day?.date.getDay()]}
+                                date={day?.date.toLocaleDateString('sr-RS')}
+                                minTemp={calculations.CalculateTemp(scale, day?.min)}
+                                maxTemp={calculations.CalculateTemp(scale, day?.max)}
+                                icon={day?.icon}
+                                hourlyForecast={day?.hourlyForecastArray} />
+                        }
+                    })
+                }
+            </div>
+        </div>
     );
 }
 

@@ -1,0 +1,21 @@
+@import './variables.scss';
+
+.forecast {
+    max-width: 900px;
+
+    h2 {
+        display: block;
+        font-family: $minorTitle;
+        font-size: $minorTitleSize;
+    }
+
+    .all-days {
+        display: flex;
+        overflow: auto;
+
+        .one-day {
+            text-align: center;
+
+        }
+    }
+}

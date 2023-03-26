@@ -5,7 +5,7 @@
 
     h2 {
         font-family: $minorTitle;
-        font-size: 28px;
+        font-size: $minorTitleSize;
     }
 
     .current-temp {
@@ -38,7 +38,7 @@
             tr {
                 margin-bottom: 10px;
 
-                td {
+                td:first-of-type {
                     padding-right: 20px;
                 }
             }
