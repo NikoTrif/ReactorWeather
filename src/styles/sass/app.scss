@@ -1,3 +1,6 @@
+@import './variables.scss';
+
 .app {
     margin: 50px;
+    font-family: $globalFont;
 }

@@ -1,9 +1,14 @@
+@import './variables.scss';
+
 .head {
     h1 {
         text-align: center;
+        font-family: 'Stencil', serif;
+        font-size: 35px;
     }
 
     button {
+        font-family: $minorTitle;
         margin: 20px 0;
         width: 100%;
         background-color: transparent;

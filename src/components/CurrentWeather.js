@@ -4,6 +4,9 @@ import * as calculations from '../backend/calculations';
 import { fetchWeatherAction, setTemperatureScale } from '../redux/slices/weatherSlices';
 import _ from 'lodash';
 
+import '../styles/sass/app.scss';
+import '../styles/sass/current-weather.scss';
+
 function CurrentWeather() {
     const dispatch = useDispatch();
     const state = useSelector(state => state);
@@ -49,14 +52,14 @@ function CurrentWeather() {
     }
 
     return (
-        <div>
-            <h3>CurrentWeather</h3>
-            <div>
-                <h2><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>{scale}</span> <span><button onClick={changeScale}>{antiscale}</button></span></h2>
+        <div className='current-weather'>
+            <h2>Weather Now</h2>
+            <div className='current-temp'>
+                <h3><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>{scale}</span> <span><button onClick={changeScale}>{antiscale}</button></span></h3>
                 <p>{showStat(weather?.weather[0]?.main, loading, error)}</p>
                 <p><span>Real Feel:</span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>{scale}</span></p>
             </div>
-            <div>
+            <div className='weather-details'>
                 <table>
                     <tbody>
                         <tr>

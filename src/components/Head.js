@@ -4,6 +4,7 @@ import { fetchCityAction, setSearchSelectToggle } from '../redux/slices/weatherS
 import SearchSelect from './SearchSelect';
 import _ from 'lodash';
 
+import '../styles/sass/app.scss';
 import '../styles/sass/head.scss';
 
 function Head() {
