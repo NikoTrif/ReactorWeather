@@ -1,0 +1,10 @@
+@import './variables.scss';
+
+.hourly-forecast {
+    .hour-wrapper {
+        position: absolute;
+        display: flex;
+        width: 500px;
+        overflow: auto;
+    }
+}

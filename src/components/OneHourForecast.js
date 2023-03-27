@@ -8,13 +8,13 @@ function OneHourForecast(props) {
     const { temperatureScale: { scale } } = state;
 
     function getTime(hour) {
-        const time = new Date(hour * 1000).toLocaleTimeString('en-GB');
+        const time = new Date(hour * 1000).toLocaleTimeString('en-GB', { timeStyle: 'short' });
         // console.log('time', time);
         return time;
     }
 
     return (
-        <div>
+        <div className='one-hour'>
             <h5>
                 {getTime(dt)}
             </h5>
