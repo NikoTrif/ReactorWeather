@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react';
 import { useSelector } from 'react-redux';
 import HourlyForecast from './HourlyForecast';
 
-import '../styles/sass/forecast.scss';
+// import '../styles/sass/forecast.scss';
 
 function DayForecast(props) {
     const state = useSelector(state => state);
@@ -18,7 +18,7 @@ function DayForecast(props) {
     return (
         <div className='one-day'>
             <button className='ui button' onClick={(e) => { dayForecastClick(e) }}>
-                <h4>{props.day}</h4>
+                <h4 className='day-name'>{props.day}</h4>
                 <h4>{props.date}</h4>
                 <img src={`https://openweathermap.org/img/wn/${props.icon}@2x.png `} alt="weatherIcon" />
                 <table>

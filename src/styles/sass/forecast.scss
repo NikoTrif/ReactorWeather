@@ -15,7 +15,42 @@
 
         .one-day {
             text-align: center;
+            font-family: $globalFont;
 
+            button {
+                font-family: $globalFont !important;
+                background-color: transparent;
+                border-radius: 30px;
+                border: 1px solid #000;
+
+                .day-name {
+                    font-family: $titleFont;
+                    margin-bottom: 5px;
+                }
+
+                h4 {
+                    font-family: $globalFont;
+                    margin: 5px 0;
+                }
+
+                img {
+                    width: 80px;
+                    height: 80px;
+                }
+
+                table {
+                    width: 100%;
+
+                    tbody {
+                        tr:first-of-type {
+                            td {
+                                border-bottom: 1px solid #000;
+                            }
+                        }
+                    }
+
+                }
+            }
         }
     }
 }
