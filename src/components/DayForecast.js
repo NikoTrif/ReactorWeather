@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import HourlyForecast from './HourlyForecast';
 
@@ -7,17 +7,18 @@ import HourlyForecast from './HourlyForecast';
 function DayForecast(props) {
     const state = useSelector(state => state);
     const { temperatureScale: { scale } } = state;
-    const [toggle, setToggle] = useState(false);
 
-    function dayForecastClick(e) {
-        // e.preventDefault()
+    useEffect(() => {
+        console.log(`Day rerendered ${props.compKey}`);
+    })
 
-        setToggle(!toggle);
+    function dayForecastClick() {
+        props.changeToggle(props.toggle, props.compKey);
     }
 
     return (
         <div className='one-day'>
-            <button className='ui button' onClick={(e) => { dayForecastClick(e) }}>
+            <button className='ui button' onClick={() => { dayForecastClick() }}>
                 <h4 className='day-name'>{props.day}</h4>
                 <h4>{props.date}</h4>
                 <img src={`https://openweathermap.org/img/wn/${props.icon}@2x.png `} alt="weatherIcon" />
@@ -40,7 +41,7 @@ function DayForecast(props) {
                     </tbody>
                 </table>
             </button>
-            {toggle ? <HourlyForecast hourlyForecast={props.hourlyForecast} /> : <></>}
+            {props.toggle ? <HourlyForecast hourlyForecast={props.hourlyForecast} /> : <></>}
 
         </div>
     );

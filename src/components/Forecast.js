@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DayForecast from './DayForecast';
 import * as calculations from '../backend/calculations';
@@ -25,6 +25,7 @@ function Forecast() {
     const { coords: { coords }, forecast: { forecast, loading, error } } = state;
     const { temperatureScale: { scale } } = state;
     const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
+    const [dayToggler, setDayToggler] = useState({ toggle: false, key: '' });
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday"];
 
     useEffect(() => {
@@ -32,7 +33,11 @@ function Forecast() {
             dispatch(fetchForecastAction(coords));
             setTempCoords(coords);
         }
-    }, [coords])
+    }, [coords]);
+
+    useEffect(() => {
+        console.log('Forecast rerender');
+    });
 
 
     const LoadDays = () => {
@@ -82,6 +87,11 @@ function Forecast() {
         }
     }
 
+    function changeToggle(toggle, key) {
+        setDayToggler({ toggle: !toggle, key: key });
+        return dayToggler.toggle;
+    }
+
     LoadDays();
 
     return (
@@ -90,15 +100,26 @@ function Forecast() {
             <div className='all-days'>
                 {
                     forecastExtracted.map((day, i) => {
+                        let tgl = false;
                         if (forecastExtracted.length !== 0) {
+                            if (dayToggler.key === `df${i}`) {
+                                tgl = dayToggler.toggle;
+                            }
+                            else {
+                                tgl = false;
+                            }
+
                             return <DayForecast
-                                key={i}
+                                key={`df${i}`}
+                                compKey={`df${i}`}
                                 day={weekday[day?.date.getDay()]}
                                 date={day?.date.toLocaleDateString('sr-RS')}
                                 minTemp={calculations.CalculateTemp(scale, day?.min)}
                                 maxTemp={calculations.CalculateTemp(scale, day?.max)}
                                 icon={day?.icon}
-                                hourlyForecast={day?.hourlyForecastArray} />
+                                hourlyForecast={day?.hourlyForecastArray}
+                                changeToggle={changeToggle}
+                                toggle={tgl} />
                         }
                     })
                 }
