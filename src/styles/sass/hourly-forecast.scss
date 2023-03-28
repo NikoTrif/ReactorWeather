@@ -1,10 +1,15 @@
 @import './variables.scss';
 
 .hourly-forecast {
+    width: 100%;
+
     .hour-wrapper {
         position: absolute;
         display: flex;
         width: 500px;
         overflow: auto;
     }
+
+    .one-hour {}
+
 }
