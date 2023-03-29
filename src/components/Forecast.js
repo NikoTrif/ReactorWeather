@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { fetchForecastAction } from '../redux/slices/weatherSlices';
 
 import '../styles/sass/forecast.scss'
+import HourlyForecast from './HourlyForecast';
 
 
 function Forecast() {

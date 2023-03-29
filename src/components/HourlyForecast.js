@@ -2,6 +2,7 @@ import React from 'react';
 import OneHourForecast from './OneHourForecast';
 
 import '../styles/sass/hourly-forecast.scss';
+import '../styles/sass/helpers.scss';
 
 function HourlyForecast(props) {
     return (
@@ -14,7 +15,6 @@ function HourlyForecast(props) {
                     })
                 }
             </div>
-
         </div>
     );
 }

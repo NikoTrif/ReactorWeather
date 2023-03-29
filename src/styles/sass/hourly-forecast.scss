@@ -1,15 +1,45 @@
 @import './variables.scss';
 
 .hourly-forecast {
-    width: 100%;
+    // width: auto;
+    margin-top: 10px;
+    // display: flex;
+    bottom: 5px;
+    right: 175px;
+    // position: absolute;
+    border: 2px solid #000;
+    border-radius: 20px;
+
+    h3 {
+        font-family: $minorTitle;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
 
     .hour-wrapper {
-        position: absolute;
+        // position: absolute;
+        // top: 35px;
+        // left: 0;
         display: flex;
+        justify-content: space-between;
+        margin-left: 10px;
         width: 500px;
         overflow: auto;
     }
 
-    .one-hour {}
+    .one-hour {
+        white-space: nowrap;
+        width: fit-content;
+        margin: 0 7px;
+        text-align: center;
+
+        h5 {
+            font-family: $globalFont;
+        }
+
+        img {
+            width: 50px;
+        }
+    }
 
 }
