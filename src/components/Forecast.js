@@ -26,7 +26,7 @@ function Forecast() {
     const { coords: { coords }, forecast: { forecast, loading, error } } = state;
     const { temperatureScale: { scale } } = state;
     const [tempCoords, setTempCoords] = useState({ lat: 0, lon: 0 });
-    const [dayToggler, setDayToggler] = useState({ toggle: false, key: '' });
+    const [dayToggler, setDayToggler] = useState({ toggle: false, key: '', selectedHourlyForecast: {} });
     const weekday = ["Sunday", "Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday"];
 
     useEffect(() => {
@@ -88,9 +88,17 @@ function Forecast() {
         }
     }
 
-    function changeToggle(toggle, key) {
-        setDayToggler({ toggle: !toggle, key: key });
-        return dayToggler.toggle;
+    function changeToggle(toggle, key, hourlyForecast) {
+        setDayToggler({ toggle: !toggle, key: key, selectedHourlyForecast: hourlyForecast });
+    }
+
+    function showHourlyForecast(toggle, hourlyForecast) {
+        if (dayToggler.toggle) {
+            return <HourlyForecast hourlyForecast={hourlyForecast} />
+        }
+        else {
+            return <></>
+        }
     }
 
     LoadDays();
@@ -125,6 +133,7 @@ function Forecast() {
                     })
                 }
             </div>
+            {showHourlyForecast(dayToggler.toggle, dayToggler.selectedHourlyForecast)}
         </div>
     );
 }

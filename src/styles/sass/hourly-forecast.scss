@@ -1,12 +1,7 @@
 @import './variables.scss';
 
 .hourly-forecast {
-    // width: auto;
     margin-top: 10px;
-    // display: flex;
-    bottom: 5px;
-    right: 175px;
-    // position: absolute;
     border: 2px solid #000;
     border-radius: 20px;
 
@@ -17,9 +12,6 @@
     }
 
     .hour-wrapper {
-        // position: absolute;
-        // top: 35px;
-        // left: 0;
         display: flex;
         justify-content: space-between;
         margin-left: 10px;

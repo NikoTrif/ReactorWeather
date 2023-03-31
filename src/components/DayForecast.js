@@ -13,7 +13,7 @@ function DayForecast(props) {
     })
 
     function dayForecastClick() {
-        props.changeToggle(props.toggle, props.compKey);
+        props.changeToggle(props.toggle, props.compKey, props.hourlyForecast);
     }
 
     return (
@@ -43,7 +43,7 @@ function DayForecast(props) {
                     </table>
                 </button>
 
-                {props.toggle ? <HourlyForecast hourlyForecast={props.hourlyForecast} /> : <></>}
+                {/* {props.toggle ? <HourlyForecast hourlyForecast={props.hourlyForecast} /> : <></>} */}
             </div>
         </>
     );
