@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DayForecast from './DayForecast';
 import * as calculations from '../backend/calculations';
+import { LoadDays } from '../backend/separateForecast';
 import _ from 'lodash';
 import { fetchForecastAction } from '../redux/slices/weatherSlices';
 
@@ -10,16 +11,16 @@ import HourlyForecast from './HourlyForecast';
 
 
 function Forecast() {
-    const forecastExtracted = [];
-    class OneDayForecast {
-        constructor() {
-            this.date = new Date();
-            this.min = 1000;
-            this.max = 0;
-            this.icon = "";
-            this.hourlyForecastArray = [];
-        }
-    }
+    // const forecastExtracted = [];
+    // class OneDayForecast {
+    //     constructor() {
+    //         this.date = new Date();
+    //         this.min = 1000;
+    //         this.max = 0;
+    //         this.icon = "";
+    //         this.hourlyForecastArray = [];
+    //     }
+    // }
 
     const state = useSelector(state => state);
     const dispatch = useDispatch();
@@ -41,52 +42,55 @@ function Forecast() {
     // });
 
 
-    const LoadDays = () => {
-        if (forecast !== undefined) {
-            let dat;
-            let datTemp = new Date();
-            let odf = new OneDayForecast();
+    // const LoadDays = () => {
+    //     if (forecast !== undefined) {
+    //         let dat;
+    //         let datTemp = new Date();
+    //         let odf = new OneDayForecast();
 
-            forecast?.list.forEach((h, index) => {
-                dat = new Date(h.dt * 1000);
+    //         forecast?.list.forEach((h, index) => {
+    //             dat = new Date(h.dt * 1000);
 
-                if (dat.toLocaleDateString() !== new Date().toLocaleDateString()) {
-                    if (datTemp.toLocaleDateString() === new Date().toLocaleDateString()) {
-                        datTemp = dat;
-                    }
-                    if (datTemp.toLocaleDateString() === dat.toLocaleDateString()) {
-                        if (h?.main?.temp_min < odf.min) {
-                            odf.min = h?.main?.temp_min;
-                        }
-                        if (h?.main?.temp_max > odf.max) {
-                            odf.max = h?.main?.temp_max;
-                        }
-                        odf.hourlyForecastArray.push(h);
-                    }
-                    else {
-                        odf.date = datTemp;
-                        odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
-                        forecastExtracted.push(odf);
-                        odf = new OneDayForecast();
-                        datTemp = dat;
-                        if (h?.main?.temp_min < odf.min) {
-                            odf.min = h?.main?.temp_min;
-                        }
-                        if (h?.main?.temp_max > odf.max) {
-                            odf.max = h?.main?.temp_max;
-                        }
-                        odf.hourlyForecastArray.push(h)
-                    }
+    //             if (dat.toLocaleDateString() !== new Date().toLocaleDateString()) {
+    //                 if (datTemp.toLocaleDateString() === new Date().toLocaleDateString()) {
+    //                     datTemp = dat;
+    //                 }
+    //                 if (datTemp.toLocaleDateString() === dat.toLocaleDateString()) {
+    //                     if (h?.main?.temp_min < odf.min) {
+    //                         odf.min = h?.main?.temp_min;
+    //                     }
+    //                     if (h?.main?.temp_max > odf.max) {
+    //                         odf.max = h?.main?.temp_max;
+    //                     }
+    //                     odf.hourlyForecastArray.push(h);
+    //                 }
+    //                 else {
+    //                     odf.date = datTemp;
+    //                     odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
+    //                     forecastExtracted.push(odf);
+    //                     odf = new OneDayForecast();
+    //                     datTemp = dat;
+    //                     if (h?.main?.temp_min < odf.min) {
+    //                         odf.min = h?.main?.temp_min;
+    //                     }
+    //                     if (h?.main?.temp_max > odf.max) {
+    //                         odf.max = h?.main?.temp_max;
+    //                     }
+    //                     odf.hourlyForecastArray.push(h)
+    //                 }
 
-                    if (index === forecast?.list.length - 1) {
-                        odf.date = datTemp;
-                        odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
-                        forecastExtracted.push(odf);
-                    }
-                }
-            });
-        }
-    }
+    //                 if (index === forecast?.list.length - 1) {
+    //                     odf.date = datTemp;
+    //                     odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
+    //                     forecastExtracted.push(odf);
+    //                 }
+    //             }
+    //             else{
+
+    //             }
+    //         });
+    //     }
+    // }
 
     function changeToggle(toggle, key, hourlyForecast) {
         setDayToggler({ toggle: !toggle, key: key, selectedHourlyForecast: hourlyForecast });
@@ -101,7 +105,14 @@ function Forecast() {
         }
     }
 
-    LoadDays();
+    let forecastExtracted = [];
+    function LoadForecast() {
+        if (forecast !== undefined) {
+            forecastExtracted = LoadDays(forecast, 'five-days');
+        }
+    }
+
+    LoadForecast();
 
     return (
         <div className='forecast'>
@@ -136,6 +147,10 @@ function Forecast() {
             {showHourlyForecast(dayToggler.toggle, dayToggler.selectedHourlyForecast)}
         </div>
     );
+
+    function newFunction() {
+        return LoadDays(forecast, 'five-days');
+    }
 }
 
 export default Forecast;

@@ -6,6 +6,8 @@ import _ from 'lodash';
 
 import '../styles/sass/app.scss';
 import '../styles/sass/current-weather.scss';
+import HourlyForecast from './HourlyForecast';
+import { LoadDays } from '../backend/separateForecast';
 
 function CurrentWeather() {
     const dispatch = useDispatch();
@@ -14,6 +16,9 @@ function CurrentWeather() {
     const { weather: { weather, loading, error } } = state;
     const { coords: { coords } } = state;
     const { temperatureScale: { scale, antiscale } } = state;
+    const { forecast: { forecast } } = state;
+
+    let todayExtracted = [];
 
     useEffect(() => {
         if (!_.isEqual(tempCoords, coords)) {
@@ -51,6 +56,14 @@ function CurrentWeather() {
         dispatch(setTemperatureScale(antiscale));
     }
 
+    function LoadToday() {
+        if (forecast !== undefined) {
+            todayExtracted = LoadDays(forecast, 'today');
+        }
+    }
+
+    LoadToday();
+
     return (
         <div className='current-weather'>
             <h2>Weather Now</h2>
@@ -81,6 +94,7 @@ function CurrentWeather() {
                     </tbody>
                 </table>
             </div>
+            <HourlyForecast hourlyForecast={todayExtracted} />
         </div>
     );
 }
