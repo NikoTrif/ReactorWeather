@@ -1,9 +1,9 @@
 @import './variables.scss';
 
 .forecast {
-    max-width: 638px;
+    max-width: 50%;
     min-width: 136px;
-    margin-left: 200px;
+    // margin-left: 100px;
 
     h2 {
         display: block;
@@ -14,10 +14,12 @@
     .all-days {
         display: flex;
         overflow: auto;
+        height: 228px;
 
         .one-day {
             text-align: center;
             font-family: $globalFont;
+            // font-size: $globalFontSize;
 
             button {
                 font-family: $globalFont !important;

@@ -1,6 +1,8 @@
 @import './variables.scss';
 
 .current-weather {
+    max-width: 50%;
+    min-width: 136px;
     font-size: $globalFontSize;
 
     h2 {
@@ -8,40 +10,46 @@
         font-size: $minorTitleSize;
     }
 
-    .current-temp {
-        margin-bottom: 20px;
+    .temp-details-wrapper {
 
-        h3 {
-            font-family: $minorTitle;
-            font-size: 25px;
+        height: 228px;
+
+        .current-temp {
+            margin-bottom: 20px;
+
+            h3 {
+                font-family: $minorTitle;
+                font-size: 25px;
+            }
+
+            button {
+                background-color: transparent;
+                border: none;
+                text-decoration: underline;
+                font-size: 18px;
+                font-family: $minorTitle;
+                cursor: pointer;
+            }
+
+            p {
+                font-family: $minorTitle;
+                margin: 0;
+            }
         }
 
-        button {
-            background-color: transparent;
-            border: none;
-            text-decoration: underline;
-            font-size: 18px;
-            font-family: $minorTitle;
-            cursor: pointer;
-        }
+        .weather-details {
+            font-size: 20px;
 
-        p {
-            font-family: $minorTitle;
-            margin: 0;
-        }
-    }
+            tbody {
+                tr {
+                    margin-bottom: 10px;
 
-    .weather-details {
-        font-size: 20px;
-
-        tbody {
-            tr {
-                margin-bottom: 10px;
-
-                td:first-of-type {
-                    padding-right: 20px;
+                    td:first-of-type {
+                        padding-right: 20px;
+                    }
                 }
             }
         }
     }
+
 }

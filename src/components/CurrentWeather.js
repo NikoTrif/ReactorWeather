@@ -67,32 +67,34 @@ function CurrentWeather() {
     return (
         <div className='current-weather'>
             <h2>Weather Now</h2>
-            <div className='current-temp'>
-                <h3><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>{scale}</span> <span><button onClick={changeScale}>{antiscale}</button></span></h3>
-                <p>{showStat(weather?.weather[0]?.main, loading, error)}</p>
-                <p><span>Real Feel:</span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>{scale}</span></p>
-            </div>
-            <div className='weather-details'>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Wind:</td>
-                            <td id="wind"><span id="wind-speed">{showStat(weather?.wind?.speed, loading, error)}</span> m/s <span id="wind-direction">{showStat(weather?.wind?.deg, loading, error)}</span>°</td>
-                        </tr>
-                        <tr>
-                            <td>Pressure:</td>
-                            <td><span id="pressure">{showStat(weather?.main?.pressure, loading, error)}</span> mb</td>
-                        </tr>
-                        <tr>
-                            <td>Humidity:</td>
-                            <td><span id="humidity">{showStat(weather?.main?.humidity, loading, error)}</span>%</td>
-                        </tr>
-                        <tr>
-                            <td>Visibility:</td>
-                            <td><span id="visibility">{showStat(weather?.visibility, loading, error)}</span> m</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div className="temp-details-wrapper">
+                <div className='current-temp'>
+                    <h3><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>{scale}</span> <span><button onClick={changeScale}>{antiscale}</button></span></h3>
+                    <p>{showStat(weather?.weather[0]?.main, loading, error)}</p>
+                    <p><span>Real Feel:</span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>{scale}</span></p>
+                </div>
+                <div className='weather-details'>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>Wind:</td>
+                                <td id="wind"><span id="wind-speed">{showStat(weather?.wind?.speed, loading, error)}</span> m/s <span id="wind-direction">{showStat(weather?.wind?.deg, loading, error)}</span>°</td>
+                            </tr>
+                            <tr>
+                                <td>Pressure:</td>
+                                <td><span id="pressure">{showStat(weather?.main?.pressure, loading, error)}</span> mb</td>
+                            </tr>
+                            <tr>
+                                <td>Humidity:</td>
+                                <td><span id="humidity">{showStat(weather?.main?.humidity, loading, error)}</span>%</td>
+                            </tr>
+                            <tr>
+                                <td>Visibility:</td>
+                                <td><span id="visibility">{showStat(weather?.visibility, loading, error)}</span> m</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <HourlyForecast hourlyForecast={todayExtracted} />
         </div>
