@@ -8,9 +8,9 @@ function DayForecast(props) {
     const state = useSelector(state => state);
     const { temperatureScale: { scale } } = state;
 
-    useEffect(() => {
-        console.log(`Day rerendered ${props.compKey}`);
-    })
+    // useEffect(() => {
+    //     console.log(`Day rerendered ${props.compKey}`);
+    // })
 
     function dayForecastClick() {
         props.changeToggle(props.toggle, props.compKey, props.hourlyForecast);

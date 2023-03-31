@@ -36,9 +36,9 @@ function Forecast() {
         }
     }, [coords]);
 
-    useEffect(() => {
-        console.log('Forecast rerender');
-    });
+    // useEffect(() => {
+    //     console.log('Forecast rerender');
+    // });
 
 
     const LoadDays = () => {
@@ -93,7 +93,7 @@ function Forecast() {
     }
 
     function showHourlyForecast(toggle, hourlyForecast) {
-        if (dayToggler.toggle) {
+        if (toggle) {
             return <HourlyForecast hourlyForecast={hourlyForecast} />
         }
         else {
