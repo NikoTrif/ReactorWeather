@@ -4,10 +4,12 @@ import * as calculations from '../backend/calculations';
 import { fetchWeatherAction, setTemperatureScale } from '../redux/slices/weatherSlices';
 import _ from 'lodash';
 
-import '../styles/sass/app.scss';
-import '../styles/sass/current-weather.scss';
 import HourlyForecast from './HourlyForecast';
 import { LoadDays } from '../backend/separateForecast';
+
+import '../styles/sass/app.scss';
+import '../styles/sass/current-weather.scss';
+import '../styles/sass/variableClasses.scss';
 
 function CurrentWeather() {
     const dispatch = useDispatch();
@@ -30,7 +32,13 @@ function CurrentWeather() {
 
     const showTemp = (temp, loading, error) => {
         if (loading === true) {
-            return 'Loading...';
+            return (
+                <div className="ui segment loader-inline">
+                    <div className="ui active inverted dimmer">
+                        <div className='ui tiny text loader'></div>
+                    </div>
+                </div>
+            );
         }
         if (error !== undefined) {
             return 'ERROR!';
@@ -42,7 +50,13 @@ function CurrentWeather() {
 
     const showStat = (stat, loading, error) => {
         if (loading === true) {
-            return 'Loading...';
+            return (
+                <div className="ui segment loader-inline">
+                    <div className="ui active inverted dimmer">
+                        <div className='ui tiny text loader'></div>
+                    </div>
+                </div>
+            );
         }
         if (error !== undefined) {
             return 'ERROR!';
