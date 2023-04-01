@@ -11,17 +11,6 @@ import HourlyForecast from './HourlyForecast';
 
 
 function Forecast() {
-    // const forecastExtracted = [];
-    // class OneDayForecast {
-    //     constructor() {
-    //         this.date = new Date();
-    //         this.min = 1000;
-    //         this.max = 0;
-    //         this.icon = "";
-    //         this.hourlyForecastArray = [];
-    //     }
-    // }
-
     const state = useSelector(state => state);
     const dispatch = useDispatch();
     const { coords: { coords }, forecast: { forecast, loading, error } } = state;
@@ -36,61 +25,6 @@ function Forecast() {
             setTempCoords(coords);
         }
     }, [coords]);
-
-    // useEffect(() => {
-    //     console.log('Forecast rerender');
-    // });
-
-
-    // const LoadDays = () => {
-    //     if (forecast !== undefined) {
-    //         let dat;
-    //         let datTemp = new Date();
-    //         let odf = new OneDayForecast();
-
-    //         forecast?.list.forEach((h, index) => {
-    //             dat = new Date(h.dt * 1000);
-
-    //             if (dat.toLocaleDateString() !== new Date().toLocaleDateString()) {
-    //                 if (datTemp.toLocaleDateString() === new Date().toLocaleDateString()) {
-    //                     datTemp = dat;
-    //                 }
-    //                 if (datTemp.toLocaleDateString() === dat.toLocaleDateString()) {
-    //                     if (h?.main?.temp_min < odf.min) {
-    //                         odf.min = h?.main?.temp_min;
-    //                     }
-    //                     if (h?.main?.temp_max > odf.max) {
-    //                         odf.max = h?.main?.temp_max;
-    //                     }
-    //                     odf.hourlyForecastArray.push(h);
-    //                 }
-    //                 else {
-    //                     odf.date = datTemp;
-    //                     odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
-    //                     forecastExtracted.push(odf);
-    //                     odf = new OneDayForecast();
-    //                     datTemp = dat;
-    //                     if (h?.main?.temp_min < odf.min) {
-    //                         odf.min = h?.main?.temp_min;
-    //                     }
-    //                     if (h?.main?.temp_max > odf.max) {
-    //                         odf.max = h?.main?.temp_max;
-    //                     }
-    //                     odf.hourlyForecastArray.push(h)
-    //                 }
-
-    //                 if (index === forecast?.list.length - 1) {
-    //                     odf.date = datTemp;
-    //                     odf.icon = (h?.weather[0]?.icon).replace('n', 'd');
-    //                     forecastExtracted.push(odf);
-    //                 }
-    //             }
-    //             else{
-
-    //             }
-    //         });
-    //     }
-    // }
 
     function changeToggle(toggle, key, hourlyForecast) {
         setDayToggler({ toggle: !toggle, key: key, selectedHourlyForecast: hourlyForecast });
@@ -128,7 +62,6 @@ function Forecast() {
                             else {
                                 tgl = false;
                             }
-
                             return <DayForecast
                                 key={`df${i}`}
                                 compKey={`df${i}`}

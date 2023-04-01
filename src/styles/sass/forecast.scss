@@ -3,36 +3,51 @@
 .forecast {
     max-width: 50%;
     min-width: 136px;
+    width: 50%;
     // margin-left: 100px;
 
     h2 {
-        display: block;
+        // margin-left: auto;
         font-family: $minorTitle;
         font-size: $minorTitleSize;
     }
 
     .all-days {
+        overflow-x: auto;
+        overflow-y: hidden;
         display: flex;
-        overflow: auto;
-        height: 228px;
+        padding-bottom: 20px;
+        height: 255px;
+
+
+        :first-child {
+            margin-left: auto;
+        }
+
 
         .one-day {
             text-align: center;
             font-family: $globalFont;
-            // font-size: $globalFontSize;
+
 
             button {
                 font-family: $globalFont !important;
                 background-color: transparent;
                 border-radius: 30px;
                 border: 1px solid #000;
+                transition: .3s;
+
+                :hover {
+                    transform: none;
+                }
+
 
                 .day-name {
                     font-family: $titleFont;
                     margin-bottom: 5px;
                 }
 
-                h4 {
+                .date {
                     font-family: $globalFont;
                     margin: 5px 0;
                 }

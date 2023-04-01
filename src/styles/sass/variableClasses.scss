@@ -1,0 +1,20 @@
+.buttonToggled {
+    position: relative;
+    bottom: -20px;
+}
+
+.hover-up {
+
+    :hover {
+        // transition: .3s;
+        transform: translateY(-20px);
+    }
+}
+
+.hover-down {
+
+    :hover {
+        // transition: .3s;
+        transform: translateY(20px);
+    }
+}
