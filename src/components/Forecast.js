@@ -80,10 +80,6 @@ function Forecast() {
             {showHourlyForecast(dayToggler.toggle, dayToggler.selectedHourlyForecast)}
         </div>
     );
-
-    function newFunction() {
-        return LoadDays(forecast, 'five-days');
-    }
 }
 
 export default Forecast;
