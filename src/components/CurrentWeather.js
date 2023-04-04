@@ -21,6 +21,7 @@ function CurrentWeather() {
     const { forecast: { forecast } } = state;
 
     let todayExtracted = [];
+    const weatherCondition = 'clear-day';
 
     useEffect(() => {
         if (!_.isEqual(tempCoords, coords)) {
@@ -79,7 +80,7 @@ function CurrentWeather() {
     LoadToday();
 
     return (
-        <div className='current-weather'>
+        <div className="current-weather">
             <h2>Weather Now</h2>
             <div className="temp-details-wrapper">
                 <div className='current-temp'>

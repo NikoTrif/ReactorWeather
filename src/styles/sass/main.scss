@@ -1,4 +1,7 @@
+@import './variables.scss';
+
 .main {
+    position: relative;
     padding-bottom: 35px;
     display: flex;
     gap: 0 50px;

@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorldAction, getCoords } from './redux/slices/weatherSlices';
 
+import Background from './components/Background';
 import Foother from './components/Foother';
 import Head from './components/Head';
 import Main from './components/Main';
 
 import './styles/sass/app.scss'
+import './styles/sass/variableClasses.scss';
 
 function App() {
     const dispatch = useDispatch();
@@ -38,7 +40,8 @@ function App() {
     }
 
     return (
-        <div className='app'>
+        <div className='app rainy-day'>
+            <Background />
             <Head />
             <Main />
             <Foother />
