@@ -84,7 +84,7 @@ function CurrentWeather() {
             <h2>Weather Now</h2>
             <div className="temp-details-wrapper">
                 <div className='current-temp'>
-                    <h3><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>{scale}</span> <span><button onClick={changeScale}>{antiscale}</button></span></h3>
+                    <h3><span>{showTemp(weather?.main?.temp, loading, error)}</span>° <span>{scale}</span> <span><button className='scale-btn' onClick={changeScale}>{antiscale}</button></span></h3>
                     <p>{showStat(weather?.weather[0]?.main, loading, error)}</p>
                     <p><span>Real Feel: </span><span>{showTemp(weather?.main?.feels_like)}</span>° <span>{scale}</span></p>
                 </div>

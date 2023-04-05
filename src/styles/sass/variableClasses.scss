@@ -1,6 +1,7 @@
 $clearDayColor: #000;
 $clearNightColor: #ccc;
-$rainyDayColor: #fff;
+$rainyDayColor: #ffffffcb;
+$rainyNightColor: #fff;
 
 
 .buttonToggled {
@@ -34,15 +35,18 @@ $rainyDayColor: #fff;
 
 .clear-day {
     color: $clearDayColor !important;
+    text-shadow: 0px 0px 4px #fff !important;
 
     button {
         color: $clearDayColor !important;
         border-color: $clearDayColor !important;
+        text-shadow: 2px 2px 4px #fff !important;
     }
 
     div {
         // backdrop-filter: blur(10px);
         border-color: $clearDayColor;
+        text-shadow: 2px 2px 4px #fff !important;
     }
 }
 
@@ -50,25 +54,42 @@ $rainyDayColor: #fff;
     color: $clearNightColor !important;
 
     button {
-        color: $clearNightColor;
-        border-color: $clearNightColor;
+        color: $clearNightColor !important;
+        border-color: $clearNightColor !important;
     }
 
     div {
-        color: $clearNightColor;
-        background-color: $clearNightColor;
+        color: $clearNightColor !important;
+        border-color: $clearNightColor !important;
     }
 }
 
-.rainy-day {
+.rain-day {
     color: $rainyDayColor !important;
+    text-shadow: 2px 2px 4px #000 !important;
 
     button {
         color: $rainyDayColor !important;
         border-color: $rainyDayColor !important;
+        text-shadow: 2px 2px 4px #000 !important;
     }
 
     div {
         border-color: $rainyDayColor !important;
+    }
+}
+
+.rain-night {
+    color: $rainyNightColor;
+    text-shadow: 2px 2px 4px #000;
+
+    button {
+        color: $rainyNightColor !important;
+        border-color: $rainyNightColor !important;
+        text-shadow: 2px 2px 4px #000 !important;
+    }
+
+    div {
+        border-color: $rainyNightColor;
     }
 }
