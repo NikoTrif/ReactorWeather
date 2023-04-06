@@ -1,8 +1,4 @@
-$clearDayColor: #000;
-$clearNightColor: #ccc;
-$rainyDayColor: #ffffffcb;
-$rainyNightColor: #fff;
-
+@import './variables';
 
 .buttonToggled {
     position: relative;
@@ -33,63 +29,97 @@ $rainyNightColor: #fff;
     padding: 0.5em 1em !important;
 }
 
-.clear-day {
-    color: $clearDayColor !important;
-    text-shadow: 0px 0px 4px #fff !important;
+// .clear-day {
+//     color: $clearDayColor !important;
+//     text-shadow: 0px 0px 4px $clearDayShadowColor !important;
 
-    button {
-        color: $clearDayColor !important;
-        border-color: $clearDayColor !important;
-        text-shadow: 2px 2px 4px #fff !important;
-    }
+//     button {
+//         color: $clearDayColor !important;
+//         border-color: $clearDayColor !important;
+//         text-shadow: 2px 2px 4px $clearDayShadowColor !important;
+//     }
 
-    div {
-        // backdrop-filter: blur(10px);
-        border-color: $clearDayColor;
-        text-shadow: 2px 2px 4px #fff !important;
-    }
-}
+//     div {
+//         // backdrop-filter: blur(10px);
+//         border-color: $clearDayColor;
+//         text-shadow: 2px 2px 4px $clearDayShadowColor !important;
+//     }
+// }
 
-.clear-night {
-    color: $clearNightColor !important;
+// .clear-night {
+//     color: $clearNightColor !important;
 
-    button {
-        color: $clearNightColor !important;
-        border-color: $clearNightColor !important;
-    }
+//     button {
+//         color: $clearNightColor !important;
+//         border-color: $clearNightColor !important;
+//     }
 
-    div {
-        color: $clearNightColor !important;
-        border-color: $clearNightColor !important;
-    }
-}
+//     div {
+//         color: $clearNightColor !important;
+//         border-color: $clearNightColor !important;
+//     }
+// }
 
-.rain-day {
-    color: $rainyDayColor !important;
-    text-shadow: 2px 2px 4px #000 !important;
+// .cloud-day {
+//     color: $cloudyDayColor !important;
+//     text-shadow: 2px 2px 4px $cloudyDayShadowColor !important;
 
-    button {
-        color: $rainyDayColor !important;
-        border-color: $rainyDayColor !important;
-        text-shadow: 2px 2px 4px #000 !important;
-    }
+//     button {
+//         color: $cloudyDayColor !important;
+//         border-color: $cloudyDayColor !important;
+//         text-shadow: 2px 2px 4px $cloudyDayShadowColor !important;
+//     }
 
-    div {
-        border-color: $rainyDayColor !important;
-    }
-}
+//     div {
+//         border-color: $cloudyDayColor !important;
+//         text-shadow: 2px 2px 4px $cloudyDayShadowColor !important;
+//     }
+// }
 
-.rain-night {
-    color: $rainyNightColor;
-    text-shadow: 2px 2px 4px #000;
+// .cloud-night {
+//     color: $cloudyNightColor !important;
+//     text-shadow: 2px 2px 4px $cloudyNightShadowColor !important;
 
-    button {
-        color: $rainyNightColor !important;
-        border-color: $rainyNightColor !important;
-        text-shadow: 2px 2px 4px #000 !important;
-    }
+//     button {
+//         color: $cloudyNightColor !important;
+//         border-color: $cloudyNightColor !important;
+//         text-shadow: 2px 2px 4px $cloudyNightShadowColor !important;
+//     }
 
-    div {
-        border-color: $rainyNightColor;
-    }
-}
+//     div {
+//         border-color: $cloudyNightColor !important;
+//         text-shadow: 2px 2px 4px $cloudyNightShadowColor !important;
+//     }
+// }
+
+// .rain-day {
+//     color: $rainyDayColor !important;
+//     text-shadow: 2px 2px 4px $rainyDayShadowColor !important;
+
+//     button {
+//         color: $rainyDayColor !important;
+//         border-color: $rainyDayColor !important;
+//         text-shadow: 2px 2px 4px $rainyDayShadowColor !important;
+//     }
+
+//     div {
+//         border-color: $rainyDayColor !important;
+//         text-shadow: 2px 2px 4px $rainyDayShadowColor !important;
+//     }
+// }
+
+// .rain-night {
+//     color: $rainyNightColor;
+//     text-shadow: 2px 2px 4px $rainyNightShadowColor;
+
+//     button {
+//         color: $rainyNightColor !important;
+//         border-color: $rainyNightColor !important;
+//         text-shadow: 2px 2px 4px $rainyNightShadowColor !important;
+//     }
+
+//     div {
+//         border-color: $rainyNightColor !important;
+//         text-shadow: 2px 2px 4px $rainyNightShadowColor !important;
+//     }
+// }

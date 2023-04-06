@@ -40,7 +40,7 @@ function App() {
     }
 
     return (
-        <div className='app rain-night'>
+        <div className='app'>
             <Background />
             <Head />
             <Main />
