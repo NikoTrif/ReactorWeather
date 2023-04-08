@@ -14,12 +14,43 @@ import snowD from '../video/snow-d.mp4';
 import snowN from '../video/snow-n.mp4';
 
 import '../styles/sass/background.scss';
+import { useSelector } from 'react-redux';
 
 function Background(props) {
+    const state = useSelector(state => state);
+
+    const { weather: { loading, error, weather } } = state;
+
+    function SelectBackground() {
+        let sunrise = new Date(weather?.sys?.sunrise * 1000);
+        let sunset = new Date(weather?.sys?.sunset * 1000);
+        let misty = ["Mist",]
+
+    }
+
+    function LoadBackground() {
+        if (loading) {
+            return (
+                <div className="ui segment video-background">
+                    <div className="ui active dimmer">
+                        <div className="ui massive text loader"></div>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            SelectBackground();
+            return (
+                <video className='video-background' autoPlay loop muted>
+                    <source src={snowN} type='video/mp4' />
+                </video>
+            )
+        }
+    }
+
+
     return (
-        <video className='video-background' autoPlay loop muted>
-            <source src={snowN} type='video/mp4' />
-        </video>
+        <>{LoadBackground()}</>
     );
 }
 

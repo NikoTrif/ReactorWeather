@@ -21,7 +21,6 @@ function CurrentWeather() {
     const { forecast: { forecast } } = state;
 
     let todayExtracted = [];
-    const weatherCondition = 'clear-day';
 
     useEffect(() => {
         if (!_.isEqual(tempCoords, coords)) {
