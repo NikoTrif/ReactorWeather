@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import clearD from '../video/clear-d.mp4';
@@ -7,13 +6,15 @@ import cloudsD from '../video/cloud-d.mp4';
 import cloudsN from '../video/cloud-n.mp4';
 import mistD from '../video/mist-d.mp4';
 import mistN from '../video/mist-n.mp4';
+import drizzleD from '../video/drizzle-d.mp4';
+import drizzleN from '../video/drizzle-n.mp4';
 import rainD from '../video/rain-d.mp4';
 import rainN from '../video/rain-n.mp4';
 import thunderD from '../video/thunder-d.mp4';
 import thunderN from '../video/thunder-n.mp4';
 import snowD from '../video/snow-d.mp4';
 import snowN from '../video/snow-n.mp4';
-import ashD from '..video/ash-d.mp4';
+import ashD from '../video/ash-d.mp4';
 import dustD from '../video/dust-d.mp4';
 import sandD from '../video/sand-d.mp4';
 import squallD from '../video/squall-d.mp4';
@@ -57,6 +58,13 @@ function Background() {
                 else {
                     return mistN;
                 }
+            case 'Drizzle':
+                if (timeNow > sunrise && timeNow < sunset) {
+                    return drizzleD;
+                }
+                else {
+                    return drizzleN;
+                }
             case 'Rain':
                 if (timeNow > sunrise && timeNow < sunset) {
                     return rainD;
@@ -78,6 +86,21 @@ function Background() {
                 else {
                     return snowN;
                 }
+            case 'Ash':
+                return ashD;
+            case 'Dust':
+                return dustD;
+            case 'Sand':
+                return sandD;
+            case 'Squall':
+                if (timeNow > sunrise && timeNow < sunset) {
+                    return squallD;
+                }
+                else {
+                    return squallN;
+                }
+            case 'Tornado':
+                return tornadoD;
             default:
                 return clearD;
         }
