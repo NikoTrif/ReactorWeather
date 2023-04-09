@@ -12,6 +12,12 @@ import thunderD from '../video/thunder-d.mp4';
 import thunderN from '../video/thunder-n.mp4';
 import snowD from '../video/snow-d.mp4';
 import snowN from '../video/snow-n.mp4';
+import ashD from '..video/ash-d.mp4';
+import dustD from '../video/dust-d.mp4';
+import sandD from '../video/sand-d.mp4';
+import squallD from '../video/squall-d.mp4';
+import squallN from '../video/squall-n.mp4';
+import tornadoD from '../video/tornado-d.mp4';
 
 import '../styles/sass/background.scss';
 
