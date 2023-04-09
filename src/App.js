@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWorldAction, getCoords } from './redux/slices/weatherSlices';
+import axios from 'axios';
 
 import Background from './components/Background';
 import Foother from './components/Foother';
