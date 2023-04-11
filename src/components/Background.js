@@ -33,8 +33,12 @@ function Background() {
         let timeNow = new Date();
         let sunrise = new Date(weather?.sys?.sunrise * 1000);
         let sunset = new Date(weather?.sys?.sunset * 1000);
-        let misty = ["Mist", "Smoke", "Haze", "Fog"];
+        const misty = ["Mist", "Smoke", "Haze", "Fog"];
         let conditionExtracted = weather?.weather[0]?.main;
+
+        if (misty.includes(conditionExtracted)) {
+            conditionExtracted = 'Mist';
+        }
 
         switch (conditionExtracted) {
             case 'Clear':
@@ -51,7 +55,7 @@ function Background() {
                 else {
                     return cloudsN;
                 }
-            case includes(misty):
+            case 'Mist':
                 if (timeNow > sunrise && timeNow < sunset) {
                     return mistD;
                 }
