@@ -123,7 +123,7 @@ function Select(props) {
                 {
                     filteredCities.map((city, i) => {
                         if (filteredCities.length !== 0) {
-                            return <option value={`${city.latitude},${city.longitude}`} key={`opt${i}`} onClick={e => {
+                            return <option value={`${city.lat},${city.lng}`} key={`opt${i}`} onClick={e => {
                                 selectOnClick(e.target.value);
                             }}>{city.city}, {city.country}</option>
                         }
