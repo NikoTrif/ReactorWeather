@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/reactorweather/static/css/main.f080ac15.css",
+    "main.js": "/reactorweather/static/js/main.aeb9c033.js",
+    "static/media/rain-n.mp4": "/reactorweather/static/media/rain-n.7fe950d8893612b0e3a6.mp4",
+    "static/media/rain-d.mp4": "/reactorweather/static/media/rain-d.4bba3fdbbdf517257aa7.mp4",
+    "static/media/ash-d.mp4": "/reactorweather/static/media/ash-d.b09e9f6bfac4ab9c0495.mp4",
+    "static/media/snow-n.mp4": "/reactorweather/static/media/snow-n.4ee6ad3ff627bd8b0045.mp4",
+    "static/media/thunder-n.mp4": "/reactorweather/static/media/thunder-n.c8e41542921e19d8f0b8.mp4",
+    "static/media/mist-n.mp4": "/reactorweather/static/media/mist-n.a2105cec609c6b90e406.mp4",
+    "static/media/cloud-d.mp4": "/reactorweather/static/media/cloud-d.823d198215e98e87e060.mp4",
+    "static/media/sand-d.mp4": "/reactorweather/static/media/sand-d.83008dd8fe2544de64be.mp4",
+    "static/media/thunder-d.mp4": "/reactorweather/static/media/thunder-d.7ece6f0a01607c8b48c9.mp4",
+    "static/media/drizzle-d.mp4": "/reactorweather/static/media/drizzle-d.76a3aa9bfc3b014811fa.mp4",
+    "static/media/clear-n.mov": "/reactorweather/static/media/clear-n.445cdeaad16f2b333637.mov",
+    "static/media/drizzle-n.mp4": "/reactorweather/static/media/drizzle-n.e75f61c7244de1a3fa89.mp4",
+    "static/media/snow-d.mp4": "/reactorweather/static/media/snow-d.cef24b9c2d7c14c729d4.mp4",
+    "static/media/clear-d.mp4": "/reactorweather/static/media/clear-d.02ec6cfd63960140169b.mp4",
+    "static/media/dust-d.mp4": "/reactorweather/static/media/dust-d.f97859786d7711b88e3a.mp4",
+    "static/media/squall-n.mp4": "/reactorweather/static/media/squall-n.9c2c230ceaea2a7210a5.mp4",
+    "static/media/tornado-d.mp4": "/reactorweather/static/media/tornado-d.72e41c9c76ed7d2b6a03.mp4",
+    "static/media/squall-d.mp4": "/reactorweather/static/media/squall-d.7f8e2c86c052c4ceff20.mp4",
+    "static/media/mist-d.mp4": "/reactorweather/static/media/mist-d.dbd358a0f56ca57a2579.mp4",
+    "static/media/cloud-n.mp4": "/reactorweather/static/media/cloud-n.f2e855d94110404af8ef.mp4",
+    "index.html": "/reactorweather/index.html",
+    "main.f080ac15.css.map": "/reactorweather/static/css/main.f080ac15.css.map",
+    "main.aeb9c033.js.map": "/reactorweather/static/js/main.aeb9c033.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f080ac15.css",
+    "static/js/main.aeb9c033.js"
+  ]
+}
