@@ -24,7 +24,7 @@ function App() {
     }, [loc]);
 
     useEffect(() => {
-        dispatch(fetchWorldAction('http://localhost:3000/worldcities.json'));
+        dispatch(fetchWorldAction('https://nikotrif.github.io/ReactorWeather/worldcities.json'));
     }, []);
 
     function LoadCurrentLocation() {
